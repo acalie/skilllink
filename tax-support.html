@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>税金・確定申告サポート - SkillLink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF4757;
+            --primary-dark: #E63946;
+            --primary-light: #FF6B7A;
+            --secondary: #FF8A5B;
+            --accent: #FFA07A;
+            --bg-light: #FFF5F5;
+            --bg-white: #FFFFFF;
+            --text-dark: #2D3436;
+            --text-gray: #636E72;
+            --text-light: #B2BEC3;
+            --success: #00D2A5;
+            --shadow: rgba(255, 71, 87, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+        header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 20px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        .nav-back {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+        .hero {
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+        .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-gray);
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .section {
+            margin-bottom: 5rem;
+        }
+        .section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+        .benefit-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .benefit-card h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .benefit-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .benefit-list {
+            list-style: none;
+        }
+        .benefit-list li {
+            padding: 0.6rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-gray);
+        }
+        .benefit-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .countries-section {
+            background: white;
+            padding: 4rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+        .country-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .country-card {
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .country-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        .country-flag {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        .country-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .tax-info {
+            margin: 1rem 0;
+        }
+        .tax-info-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #E8E8E8;
+        }
+        .tax-info-item:last-child {
+            border-bottom: none;
+        }
+        .tax-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .tax-value {
+            color: var(--text-dark);
+            margin-top: 0.3rem;
+        }
+        .process-section {
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+            padding: 4rem;
+            border-radius: 30px;
+        }
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .step-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin: 0 auto 1.5rem;
+        }
+        .step-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+        .step-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+        .pricing-section {
+            text-align: center;
+            padding: 4rem;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .pricing-card {
+            padding: 3rem 2rem;
+            background: var(--bg-light);
+            border-radius: 20px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        .pricing-card.featured {
+            border-color: var(--primary);
+            background: linear-gradient(135deg, #FFF5F5 0%, white 100%);
+            transform: scale(1.05);
+        }
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        .plan-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .plan-price {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .plan-unit {
+            color: var(--text-gray);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        .plan-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+        .plan-features li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+        }
+        .plan-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 71, 87, 0.3);
+        }
+        .btn-outline {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        .faq-section {
+            margin-top: 4rem;
+        }
+        .faq-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .faq-question {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .faq-answer {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .section-title { font-size: 1.8rem; }
+            .benefits-grid, .country-detail, .process-steps, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">SkillLink</a>
+            <a href="index.html" class="nav-back">← ホームに戻る</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>海外での<span class="highlight">税金・確定申告</span>を<br>プラットフォームが完全サポート</h1>
+        <p>各国の税制に精通した専門家が、複雑な確定申告をサポート。<br>SkillLinkなら、海外でのフリーランス活動も安心です。</p>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <h2 class="section-title">SkillLink税金サポートの3つの特徴</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>自動収支管理システム</h3>
+                    <p>プラットフォーム上のすべての取引を自動で記録・集計。確定申告に必要な書類を自動生成します。</p>
+                    <ul class="benefit-list">
+                        <li>月次・年次収支レポート自動作成</li>
+                        <li>経費カテゴリ別管理</li>
+                        <li>インボイス自動発行・管理</li>
+                        <li>取引履歴のエクスポート機能</li>
+                        <li>リアルタイム収益ダッシュボード</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌍</div>
+                    <h3>主要8カ国の税制に対応</h3>
+                    <p>居住国の税制に完全対応。VAT/消費税の自動計算から、所得税の申告サポートまで。</p>
+                    <ul class="benefit-list">
+                        <li>国別税率の自動適用</li>
+                        <li>二重課税の回避アドバイス</li>
+                        <li>現地語での申告書類作成</li>
+                        <li>税制変更の自動通知</li>
+                        <li>日本の確定申告サポート</li>
+                    </ul>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">👨‍💼</div>
+                    <h3>専門家による個別サポート</h3>
+                    <p>税理士・会計士との直接相談が可能。複雑なケースも安心してお任せください。</p>
+                    <ul class="benefit-list">
+                        <li>オンライン相談予約システム</li>
+                        <li>確定申告代行サービス</li>
+                        <li>税務調査対策サポート</li>
+                        <li>節税アドバイス</li>
+                        <li>24時間チャットサポート</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">対応国別の税制情報</h2>
+            <div class="countries-section">
+                <div class="country-detail">
+                    <div class="country-card">
+                        <div class="country-flag">🇩🇪</div>
+                        <h3>ドイツ</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">VAT（付加価値税）</div>
+                                <div class="tax-value">標準税率: 19% / 軽減税率: 7%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">所得税</div>
+                                <div class="tax-value">累進課税: 0%〜45%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">翌年7月31日</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">Einkommenssteuererklärung、Umsatzsteuervoranmeldung、Gewerbesteuererklärung</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="country-card">
+                        <div class="country-flag">🇫🇷</div>
+                        <h3>フランス</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">TVA（付加価値税）</div>
+                                <div class="tax-value">標準税率: 20% / 軽減税率: 5.5%/10%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">所得税</div>
+                                <div class="tax-value">累進課税: 0%〜45%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">翌年5月末</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">Déclaration de revenus、TVA、Cotisations sociales</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="country-card">
+                        <div class="country-flag">🇬🇧</div>
+                        <h3>イギリス</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">VAT（付加価値税）</div>
+                                <div class="tax-value">標準税率: 20% / 軽減税率: 5%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">所得税</div>
+                                <div class="tax-value">累進課税: 0%〜45%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">翌年1月31日（Self Assessment）</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">Self Assessment、VAT Returns、National Insurance</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="country-card">
+                        <div class="country-flag">🇺🇸</div>
+                        <h3>アメリカ</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">Sales Tax（消費税）</div>
+                                <div class="tax-value">州により異なる: 0%〜10%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">連邦所得税</div>
+                                <div class="tax-value">累進課税: 10%〜37%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">翌年4月15日</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">Form 1040、Schedule C、State Tax Returns</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="country-card">
+                        <div class="country-flag">🇨🇦</div>
+                        <h3>カナダ</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">GST/HST</div>
+                                <div class="tax-value">5%〜15%（州により異なる）</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">所得税</div>
+                                <div class="tax-value">連邦税: 15%〜33% + 州税</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">翌年4月30日</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">T1 General、GST/HST Returns、Provincial Returns</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="country-card">
+                        <div class="country-flag">🇦🇺</div>
+                        <h3>オーストラリア</h3>
+                        <div class="tax-info">
+                            <div class="tax-info-item">
+                                <div class="tax-label">GST（消費税）</div>
+                                <div class="tax-value">10%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">所得税</div>
+                                <div class="tax-value">累進課税: 0%〜45%</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">確定申告期限</div>
+                                <div class="tax-value">10月31日</div>
+                            </div>
+                            <div class="tax-info-item">
+                                <div class="tax-label">対応サービス</div>
+                                <div class="tax-value">Tax Return、BAS、PAYG</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="process-section">
+                <h2 class="section-title" style="color: var(--text-dark);">確定申告サポートの流れ</h2>
+                <div class="process-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>取引データ自動収集</h3>
+                        <p>プラットフォーム上の全取引が自動で記録されます。手動入力は不要です。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>収支レポート生成</h3>
+                        <p>AIが取引データを分析し、税務申告に必要なレポートを自動生成します。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>専門家による確認</h3>
+                        <p>税理士がレポートを確認し、最適な申告方法をアドバイスします。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>申告書類作成</h3>
+                        <p>居住国の税制に準拠した申告書類を作成。現地語にも対応しています。</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-number">5</div>
+                        <h3>申告完了</h3>
+                        <p>書類の提出代行も可能。申告後のフォローアップもお任せください。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="pricing-section">
+                <h2 class="section-title">料金プラン</h2>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">あなたの活動規模に合わせたプランをご用意</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="plan-name">ベーシック</div>
+                        <div class="plan-price">無料</div>
+                        <div class="plan-unit">基本機能のみ</div>
+                        <ul class="plan-features">
+                            <li>自動収支管理</li>
+                            <li>月次レポート</li>
+                            <li>インボイス発行</li>
+                            <li>取引履歴ダウンロード</li>
+                        </ul>
+                        <button class="btn btn-outline">無料で始める</button>
+                    </div>
+
+                    <div class="pricing-card featured">
+                        <div class="plan-name">スタンダード</div>
+                        <div class="plan-price">¥9,800</div>
+                        <div class="plan-unit">/ 年</div>
+                        <ul class="plan-features">
+                            <li>ベーシックの全機能</li>
+                            <li>確定申告書類自動生成</li>
+                            <li>税理士チャット相談（月1回）</li>
+                            <li>節税アドバイス</li>
+                            <li>税制変更通知</li>
+                        </ul>
+                        <button class="btn btn-primary">おすすめ</button>
+                    </div>
+
+                    <div class="pricing-card">
+                        <div class="plan-name">プレミアム</div>
+                        <div class="plan-price">¥29,800</div>
+                        <div class="plan-unit">/ 年</div>
+                        <ul class="plan-features">
+                            <li>スタンダードの全機能</li>
+                            <li>確定申告代行サービス</li>
+                            <li>税理士相談無制限</li>
+                            <li>税務調査対策サポート</li>
+                            <li>複数国対応</li>
+                            <li>優先サポート</li>
+                        </ul>
+                        <button class="btn btn-outline">詳細を見る</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2 class="section-title">よくある質問</h2>
+            <div class="faq-item">
+                <div class="faq-question">Q. プラットフォーム外の収入も管理できますか?</div>
+                <div class="faq-answer">A. はい、可能です。手動で取引を追加する機能があり、SkillLink外の収入や経費も一元管理できます。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q. 確定申告の代行はどの国に対応していますか?</div>
+                <div class="faq-answer">A. 現在、ドイツ、フランス、イギリス、アメリカ、カナダ、オーストラリア、スペイン、イタリアの8カ国に対応しています。順次対応国を拡大予定です。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q. 日本の確定申告にも対応していますか?</div>
+                <div class="faq-answer">A. はい、対応しています。海外在住者向けの日本の確定申告（国外所得の申告等）もサポートします。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q. 過去の年度の申告もサポートしてもらえますか?</div>
+                <div class="faq-answer">A. はい、プレミアムプランでは過去3年分までの遡及申告サポートも提供しています。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Q. VAT登録が必要かどうかわかりません</div>
+                <div class="faq-answer">A. 税理士との初回相談で、あなたの状況に応じてVAT登録の要否を判断し、必要な場合は登録手続きもサポートします。</div>
+            </div>
+        </section>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">税金の心配なく、<br>海外でのスキルシェアを始めよう</h2>
+            <a href="index.html" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem;">今すぐ無料登録</a>
+        </div>
+    </div>
+
+    <footer style="background: var(--text-dark); color: white; padding: 3rem 2rem; margin-top: 5rem;">
+        <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+            <p>&copy; 2024 SkillLink. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

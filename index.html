@@ -117,6 +117,7 @@
             cursor: pointer;
             font-size: 1rem;
             font-family: 'Noto Sans JP', sans-serif;
+            display: inline-block;
         }
         
         .btn-primary {
@@ -346,6 +347,176 @@
             color: var(--text-gray);
             line-height: 1.8;
         }
+
+        /* Tax Support Section - NEW */
+        .tax-support {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tax-support::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 138, 91, 0.15) 0%, transparent 70%);
+        }
+
+        .tax-support-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tax-hero {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .tax-hero h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .tax-hero .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tax-hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .tax-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .tax-feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .tax-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px var(--shadow-strong);
+        }
+
+        .tax-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tax-feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .tax-feature-card p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .tax-feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .tax-feature-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            color: var(--text-gray);
+        }
+
+        .tax-feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .tax-countries {
+            background: white;
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .tax-countries h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--text-dark);
+        }
+
+        .countries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .country-card {
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .country-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .country-flag {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .country-card h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
         
         /* Categories Section */
         .categories {
@@ -546,9 +717,18 @@
                 width: 100%;
                 text-align: center;
             }
+
+            .tax-hero h2 {
+                font-size: 2rem;
+            }
+
+            .tax-features-grid {
+                grid-template-columns: 1fr;
+            }
             
             .features-grid,
-            .categories-grid {
+            .categories-grid,
+            .countries-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -575,6 +755,7 @@
             <ul class="nav-links">
                 <li><a href="search.html">サービスを探す</a></li>
                 <li><a href="create-listing.html">出品する</a></li>
+                <li><a href="tax-support.html">税金サポート</a></li>
                 <li><a href="#how-it-works">使い方</a></li>
                 <li><a href="#" class="btn btn-outline">ログイン</a></li>
                 <li><a href="#" class="btn btn-primary">無料登録</a></li>
@@ -655,6 +836,100 @@
                     <div class="feature-icon">⭐</div>
                     <h3>レビュー & バッジ</h3>
                     <p>実績に応じたバッジで信頼を可視化。AIがレビューを要約し、品質の高いサービスを簡単に見つけられます。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW: Tax Support Section -->
+    <section class="tax-support">
+        <div class="tax-support-container">
+            <div class="tax-hero">
+                <h2>海外での<span class="highlight">税金・確定申告</span>も<br>プラットフォームが完全サポート</h2>
+                <p>各国の税制に精通した専門家が、あなたの確定申告をサポート。複雑な税務処理も安心してお任せください。</p>
+            </div>
+
+            <div class="tax-features-grid">
+                <div class="tax-feature-card">
+                    <div class="tax-icon">📊</div>
+                    <h3>自動収支計算</h3>
+                    <p>プラットフォーム上の取引データから自動で収支を計算。確定申告に必要な書類を自動生成します。</p>
+                    <ul class="tax-feature-list">
+                        <li>月次・年次レポート自動作成</li>
+                        <li>経費管理サポート</li>
+                        <li>インボイス自動発行</li>
+                    </ul>
+                </div>
+
+                <div class="tax-feature-card">
+                    <div class="tax-icon">🌍</div>
+                    <h3>各国税制対応</h3>
+                    <p>ドイツ、フランス、イギリスなど主要国の税制に対応。居住国に応じた適切な税務処理をサポートします。</p>
+                    <ul class="tax-feature-list">
+                        <li>国別税率の自動適用</li>
+                        <li>二重課税の回避サポート</li>
+                        <li>現地語での書類作成</li>
+                    </ul>
+                </div>
+
+                <div class="tax-feature-card">
+                    <div class="tax-icon">👨‍💼</div>
+                    <h3>専門家相談</h3>
+                    <p>税理士・会計士との直接相談が可能。複雑な税務処理や個別の相談にも対応します。</p>
+                    <ul class="tax-feature-list">
+                        <li>オンライン相談予約</li>
+                        <li>確定申告代行サービス</li>
+                        <li>税務調査対策サポート</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tax-countries">
+                <h3>対応国・地域</h3>
+                <div class="countries-grid">
+                    <div class="country-card">
+                        <div class="country-flag">🇩🇪</div>
+                        <h4>ドイツ</h4>
+                        <p>VAT、所得税、営業税に対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇫🇷</div>
+                        <h4>フランス</h4>
+                        <p>TVA、所得税、社会保障に対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇬🇧</div>
+                        <h4>イギリス</h4>
+                        <p>VAT、Self Assessment対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇪🇸</div>
+                        <h4>スペイン</h4>
+                        <p>IVA、IRPF対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇮🇹</div>
+                        <h4>イタリア</h4>
+                        <p>IVA、所得税対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇺🇸</div>
+                        <h4>アメリカ</h4>
+                        <p>Federal Tax、State Tax対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇨🇦</div>
+                        <h4>カナダ</h4>
+                        <p>GST/HST、所得税対応</p>
+                    </div>
+                    <div class="country-card">
+                        <div class="country-flag">🇦🇺</div>
+                        <h4>オーストラリア</h4>
+                        <p>GST、Income Tax対応</p>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="tax-support.html" class="btn btn-primary">税金サポート詳細を見る</a>
                 </div>
             </div>
         </div>
@@ -755,6 +1030,7 @@
                     <ul>
                         <li><a href="search.html">サービスを探す</a></li>
                         <li><a href="create-listing.html">出品する</a></li>
+                        <li><a href="tax-support.html">税金サポート</a></li>
                         <li><a href="#">カテゴリー一覧</a></li>
                     </ul>
                 </div>
