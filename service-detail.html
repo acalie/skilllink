@@ -4,612 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サービス詳細 - SkillLink</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #FF4757;
-            --primary-dark: #E63946;
-            --primary-light: #FF6B7A;
-            --secondary: #FF8A5B;
-            --accent: #FFA07A;
-            --bg-light: #FFF5F5;
-            --bg-white: #FFFFFF;
-            --text-dark: #2D3436;
-            --text-gray: #636E72;
-            --text-light: #B2BEC3;
-            --success: #00D2A5;
-            --shadow: rgba(255, 71, 87, 0.15);
-            --shadow-strong: rgba(255, 71, 87, 0.25);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            background: var(--bg-light);
-        }
-        
-        /* Header */
-        header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 20px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-            text-decoration: none;
-        }
-        
-        .nav-back {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-back:hover {
-            color: var(--primary);
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 2rem;
-        }
-        
-        /* Left Column - Service Details */
-        .service-main {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .service-hero {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .service-hero-image {
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 8rem;
-            position: relative;
-        }
-        
-        .service-badge {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0.6rem 1.2rem;
-            border-radius: 25px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-        
-        .service-hero-content {
-            padding: 2rem;
-        }
-        
-        .service-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.3;
-        }
-        
-        .service-meta-row {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.95rem;
-            color: var(--text-gray);
-        }
-        
-        .service-tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-        
-        .tag {
-            padding: 0.5rem 1rem;
-            background: var(--bg-light);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--primary);
-            font-weight: 500;
-        }
-        
-        /* Provider Section */
-        .provider-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .provider-header {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .provider-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            font-weight: 700;
-        }
-        
-        .provider-info h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        
-        .provider-location {
-            color: var(--text-gray);
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        
-        .provider-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
-            padding: 1.5rem;
-            background: var(--bg-light);
-            border-radius: 15px;
-            margin-bottom: 1.5rem;
-        }
-        
-        .stat {
-            text-align: center;
-        }
-        
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-top: 0.3rem;
-        }
-        
-        .provider-bio {
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-        
-        /* Description Section */
-        .description-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .description-section h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .description-section p {
-            color: var(--text-gray);
-            line-height: 1.9;
-            margin-bottom: 1rem;
-        }
-        
-        .description-section ul {
-            list-style: none;
-            margin-left: 0;
-        }
-        
-        .description-section li {
-            padding: 0.8rem 0;
-            padding-left: 2rem;
-            position: relative;
-            color: var(--text-gray);
-        }
-        
-        .description-section li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: 700;
-            font-size: 1.2rem;
-        }
-        
-        /* Reviews Section */
-        .reviews-section {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .reviews-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        
-        .reviews-summary {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .rating-large {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary);
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .rating-stars {
-            font-size: 1.5rem;
-        }
-        
-        .review-card {
-            padding: 1.5rem;
-            background: var(--bg-light);
-            border-radius: 15px;
-            margin-bottom: 1rem;
-        }
-        
-        .review-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .review-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-light), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-        }
-        
-        .review-info h4 {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-        
-        .review-date {
-            font-size: 0.85rem;
-            color: var(--text-light);
-        }
-        
-        .review-rating {
-            margin-left: auto;
-        }
-        
-        .review-text {
-            color: var(--text-gray);
-            line-height: 1.7;
-        }
-        
-        /* Right Column - Booking */
-        .booking-sidebar {
-            position: sticky;
-            top: 100px;
-            height: fit-content;
-        }
-        
-        .booking-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px var(--shadow);
-        }
-        
-        .price-section {
-            text-align: center;
-            padding: 2rem 0;
-            border-bottom: 2px solid #F0F0F0;
-            margin-bottom: 2rem;
-        }
-        
-        .price-amount {
-            font-size: 3rem;
-            font-weight: 900;
-            color: var(--primary);
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .price-unit {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-        
-        .booking-options {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .option-group h3 {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 0.8rem;
-            color: var(--text-dark);
-        }
-        
-        select, input[type="date"] {
-            width: 100%;
-            padding: 0.9rem;
-            border: 2px solid #E8E8E8;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: 'Noto Sans JP', sans-serif;
-            transition: all 0.3s;
-        }
-        
-        select:focus, input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--shadow);
-        }
-        
-        .btn-book {
-            width: 100%;
-            padding: 1.2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Noto Sans JP', sans-serif;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-book:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--shadow-strong);
-        }
-        
-        .btn-message {
-            width: 100%;
-            padding: 1rem;
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        
-        .btn-message:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .booking-info {
-            padding: 1.5rem;
-            background: linear-gradient(135deg, #FFF5F5 0%, white 100%);
-            border-radius: 12px;
-            margin-top: 2rem;
-        }
-        
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-gray);
-        }
-        
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .modal.active {
-            display: flex;
-        }
-        
-        .modal-content {
-            background: white;
-            padding: 3rem;
-            border-radius: 25px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            animation: modalSlideIn 0.3s ease;
-        }
-        
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        .modal-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-content h2 {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-        
-        .modal-content p {
-            color: var(--text-gray);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-        }
-        
-        .modal-actions {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .btn {
-            flex: 1;
-            padding: 1rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--text-dark);
-            border: 2px solid #E8E8E8;
-        }
-        
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .container {
-                grid-template-columns: 1fr;
-            }
-            
-            .booking-sidebar {
-                position: static;
-                order: -1;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-            }
-            
-            .service-hero-image {
-                height: 250px;
-                font-size: 5rem;
-            }
-            
-            .service-title {
-                font-size: 1.5rem;
-            }
-            
-            .price-amount {
-                font-size: 2.5rem;
-            }
-            
-            .provider-stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .modal-content {
-                padding: 2rem;
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif; color: #2D3436; background: #FFF5F5; }
+        header { background: white; box-shadow: 0 2px 10px rgba(255,71,87,0.1); position: sticky; top: 0; z-index: 100; }
+        nav { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #FF4757; text-decoration: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
+        .service-hero { background: white; border-radius: 15px; overflow: hidden; margin-bottom: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .service-image { width: 100%; height: 200px; background: linear-gradient(135deg, #FF6B7A, #FF8A5B); display: flex; align-items: center; justify-content: center; font-size: 5rem; position: relative; }
+        .service-badge { position: absolute; top: 1rem; right: 1rem; background: white; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: bold; color: #FF4757; }
+        .service-content { padding: 1.5rem; }
+        .service-title { font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem; line-height: 1.3; }
+        .service-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; font-size: 0.9rem; color: #636E72; }
+        .service-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+        .tag { padding: 0.4rem 0.9rem; background: #FFF5F5; border-radius: 15px; font-size: 0.85rem; color: #FF4757; }
+        .section { background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .provider-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+        .provider-avatar { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #FF4757, #FF8A5B); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white; font-weight: bold; }
+        .provider-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; padding: 1rem; background: #FFF5F5; border-radius: 10px; text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: bold; color: #FF4757; }
+        .stat-label { font-size: 0.8rem; color: #636E72; }
+        .description-text { color: #636E72; line-height: 1.8; }
+        .review-card { padding: 1.2rem; background: #FFF5F5; border-radius: 12px; margin-bottom: 1rem; }
+        .review-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+        .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #FF6B7A, #FFA07A); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
+        .booking-card { background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(255,71,87,0.2); position: sticky; top: 80px; }
+        .price-section { text-align: center; padding: 1.5rem 0; border-bottom: 2px solid #F0F0F0; margin-bottom: 1.5rem; }
+        .price-amount { font-size: 2.5rem; font-weight: bold; color: #FF4757; }
+        .price-unit { font-size: 1rem; color: #636E72; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: bold; margin-bottom: 0.4rem; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 0.8rem; border: 2px solid #E8E8E8; border-radius: 8px; font-size: 1rem; }
+        .btn-book { width: 100%; padding: 1rem; background: linear-gradient(135deg, #FF4757, #FF8A5B); color: white; border: none; border-radius: 10px; font-weight: bold; font-size: 1.1rem; cursor: pointer; margin-bottom: 0.8rem; }
+        .btn-message { width: 100%; padding: 0.9rem; background: white; color: #FF4757; border: 2px solid #FF4757; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .info-item { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.8rem; font-size: 0.85rem; color: #636E72; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 1rem; }
+        .modal.show { display: flex; }
+        .modal-content { background: white; padding: 2rem; border-radius: 20px; max-width: 500px; width: 100%; text-align: center; }
+        .modal-icon { font-size: 3rem; margin-bottom: 1rem; }
+        .modal h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+        .modal p { color: #636E72; margin-bottom: 1.5rem; line-height: 1.6; }
+        .modal-actions { display: flex; gap: 0.8rem; }
+        .btn { flex: 1; padding: 0.9rem; border-radius: 10px; font-weight: bold; cursor: pointer; border: none; font-size: 1rem; }
+        .btn-primary { background: linear-gradient(135deg, #FF4757, #FF8A5B); color: white; }
+        .btn-secondary { background: white; color: #2D3436; border: 2px solid #E8E8E8; }
+        @media (min-width: 1024px) {
+            .container { display: grid; grid-template-columns: 1fr 400px; gap: 2rem; padding: 2rem; }
+            .service-image { height: 300px; }
         }
     </style>
 </head>
@@ -617,25 +60,24 @@
     <header>
         <nav>
             <a href="index.html" class="logo">SkillLink</a>
-            <a href="search.html" class="nav-back">← 検索に戻る</a>
+            <a href="search.html" style="text-decoration: none; color: #2D3436;">← 検索</a>
         </nav>
     </header>
 
     <div class="container">
-        <!-- Left Column -->
-        <div class="service-main">
+        <div>
             <div class="service-hero">
-                <div class="service-hero-image">
+                <div class="service-image">
                     🛒
                     <div class="service-badge">AI推奨</div>
                 </div>
-                <div class="service-hero-content">
+                <div class="service-content">
                     <h1 class="service-title">ベルリン市内の買い物・移動同行サポート</h1>
-                    <div class="service-meta-row">
-                        <span class="meta-item">🤝 対面</span>
-                        <span class="meta-item">⏰ 時間制</span>
-                        <span class="meta-item">📍 ベルリン</span>
-                        <span class="meta-item">⭐ 4.9 (127件のレビュー)</span>
+                    <div class="service-meta">
+                        <span>🤝 対面</span>
+                        <span>⏰ 時間制</span>
+                        <span>📍 ベルリン</span>
+                        <span>⭐ 4.9 (127件)</span>
                     </div>
                     <div class="service-tags">
                         <span class="tag">買い物同行</span>
@@ -645,83 +87,53 @@
                 </div>
             </div>
 
-            <div class="provider-section">
+            <div class="section">
                 <div class="provider-header">
                     <div class="provider-avatar">田</div>
-                    <div class="provider-info">
-                        <h3>田中 美咲</h3>
-                        <div class="provider-location">📍 ベルリン在住 10年</div>
+                    <div>
+                        <h3 style="margin-bottom: 0.2rem;">田中 美咲</h3>
+                        <div style="color: #636E72; font-size: 0.9rem;">📍 ベルリン在住 10年</div>
                     </div>
                 </div>
-                
                 <div class="provider-stats">
-                    <div class="stat">
-                        <div class="stat-value">127</div>
-                        <div class="stat-label">完了件数</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">4.9</div>
-                        <div class="stat-label">評価</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">98%</div>
-                        <div class="stat-label">返信率</div>
-                    </div>
+                    <div><div class="stat-value">127</div><div class="stat-label">完了件数</div></div>
+                    <div><div class="stat-value">4.9</div><div class="stat-label">評価</div></div>
+                    <div><div class="stat-value">98%</div><div class="stat-label">返信率</div></div>
                 </div>
-                
-                <p class="provider-bio">
+                <p class="description-text" style="margin-top: 1rem;">
                     ベルリン在住10年。現地企業での勤務経験があり、ドイツ語・日本語・英語のトリリンガルです。
                     日常的な買い物から、重要な契約の立ち会いまで、幅広くサポートさせていただきます。
-                    子育て経験もありますので、お子様連れの方も安心してご利用ください。
                 </p>
             </div>
 
-            <div class="description-section">
+            <div class="section">
                 <h2>📋 サービス内容</h2>
-                <p>
+                <p class="description-text">
                     ドイツ語での交渉が必要な買い物や、公共交通機関の利用をサポートします。
                     10年の現地経験を活かし、スムーズな案内が可能です。
+                    スーパーでの食材選び、薬局での医薬品購入、電器店での製品選びなど、幅広く対応いたします。
                 </p>
-                <h3 style="margin: 1.5rem 0 1rem; font-size: 1.2rem;">このサービスで得られること</h3>
-                <ul>
-                    <li>スーパーマーケットでの食材選びと購入サポート</li>
-                    <li>薬局での医薬品購入と説明の通訳</li>
-                    <li>電器店や家具店での製品選びと交渉</li>
-                    <li>公共交通機関（U-Bahn, S-Bahn, バス）の利用案内</li>
-                    <li>その他日常生活で必要な同行サポート</li>
-                </ul>
-                
-                <h3 style="margin: 1.5rem 0 1rem; font-size: 1.2rem;">こんな方におすすめ</h3>
-                <ul>
-                    <li>ドイツ語に不安がある方</li>
-                    <li>初めてベルリンに来られた方</li>
-                    <li>重要な買い物で失敗したくない方</li>
-                    <li>現地の商習慣を知りたい方</li>
-                </ul>
             </div>
 
-            <div class="reviews-section">
-                <div class="reviews-header">
-                    <h2>⭐ レビュー</h2>
-                    <div class="reviews-summary">
-                        <div class="rating-large">4.9</div>
-                        <div>
-                            <div class="rating-stars">⭐⭐⭐⭐⭐</div>
-                            <div style="color: var(--text-gray); font-size: 0.9rem;">127件のレビュー</div>
-                        </div>
+            <div class="section">
+                <h2>⭐ レビュー</h2>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                    <div style="font-size: 2.5rem; font-weight: bold; color: #FF4757;">4.9</div>
+                    <div>
+                        <div style="font-size: 1.3rem;">⭐⭐⭐⭐⭐</div>
+                        <div style="color: #636E72; font-size: 0.9rem;">127件のレビュー</div>
                     </div>
                 </div>
 
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar">佐</div>
-                        <div class="review-info">
-                            <h4>佐藤 由美</h4>
-                            <div class="review-date">2024年11月</div>
+                        <div>
+                            <strong>佐藤 由美</strong>
+                            <div style="font-size: 0.8rem; color: #636E72;">2024年11月 ⭐⭐⭐⭐⭐</div>
                         </div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
                     </div>
-                    <p class="review-text">
+                    <p class="description-text">
                         初めてのベルリン生活で不安でしたが、田中さんのおかげでスムーズに生活用品を揃えることができました。
                         商品の選び方や現地の相場なども教えてくださり、とても助かりました!
                     </p>
@@ -730,140 +142,97 @@
                 <div class="review-card">
                     <div class="review-header">
                         <div class="review-avatar">山</div>
-                        <div class="review-info">
-                            <h4>山本 健太</h4>
-                            <div class="review-date">2024年10月</div>
+                        <div>
+                            <strong>山本 健太</strong>
+                            <div style="font-size: 0.8rem; color: #636E72;">2024年10月 ⭐⭐⭐⭐⭐</div>
                         </div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
                     </div>
-                    <p class="review-text">
+                    <p class="description-text">
                         子供の学用品を買う際にお願いしました。ドイツの学校システムや必要な物品について
-                        詳しく説明してくださり、無駄な買い物をせずに済みました。また利用させていただきます!
-                    </p>
-                </div>
-
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-avatar">鈴</div>
-                        <div class="review-info">
-                            <h4>鈴木 真理子</h4>
-                            <div class="review-date">2024年10月</div>
-                        </div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p class="review-text">
-                        薬局での処方箋対応をサポートしていただきました。医療用語の通訳は特に助かりました。
-                        親切で丁寧な対応で、安心してお任せできます。
+                        詳しく説明してくださり、無駄な買い物をせずに済みました。
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column - Booking -->
-        <aside class="booking-sidebar">
+        <div>
             <div class="booking-card">
                 <div class="price-section">
                     <div class="price-amount">¥4,500</div>
                     <div class="price-unit">/ 時間</div>
                 </div>
 
-                <div class="booking-options">
-                    <div class="option-group">
-                        <h3>希望日時</h3>
-                        <input type="date" id="bookingDate" min="">
-                    </div>
-
-                    <div class="option-group">
-                        <h3>時間帯</h3>
-                        <select id="bookingTime">
-                            <option value="">選択してください</option>
-                            <option value="morning">午前 (9:00-12:00)</option>
-                            <option value="afternoon">午後 (13:00-17:00)</option>
-                            <option value="evening">夕方 (17:00-20:00)</option>
-                        </select>
-                    </div>
-
-                    <div class="option-group">
-                        <h3>利用時間</h3>
-                        <select id="bookingDuration">
-                            <option value="">選択してください</option>
-                            <option value="1">1時間 - ¥4,500</option>
-                            <option value="2">2時間 - ¥9,000</option>
-                            <option value="3">3時間 - ¥13,500</option>
-                            <option value="4">4時間 - ¥18,000</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label>希望日時</label>
+                    <input type="date" id="bookingDate">
                 </div>
 
-                <button class="btn-book" id="bookBtn">今すぐ予約</button>
-                <button class="btn-message" id="messageBtn">💬 メッセージを送る</button>
-
-                <div class="booking-info">
-                    <div class="info-item">
-                        <span>🛡️</span>
-                        <span>Stripe安全決済</span>
-                    </div>
-                    <div class="info-item">
-                        <span>📅</span>
-                        <span>24時間前まで無料キャンセル</span>
-                    </div>
-                    <div class="info-item">
-                        <span>✉️</span>
-                        <span>予約後、自動でインボイス発行</span>
-                    </div>
-                    <div class="info-item">
-                        <span>💬</span>
-                        <span>チャット機能で質問可能</span>
-                    </div>
+                <div class="form-group">
+                    <label>時間帯</label>
+                    <select id="bookingTime">
+                        <option value="">選択してください</option>
+                        <option value="morning">午前 (9:00-12:00)</option>
+                        <option value="afternoon">午後 (13:00-17:00)</option>
+                        <option value="evening">夕方 (17:00-20:00)</option>
+                    </select>
                 </div>
-            </div>
-        </aside>
-    </div>
 
-    <!-- Booking Confirmation Modal -->
-    <div class="modal" id="bookingModal">
-        <div class="modal-content">
-            <div class="modal-icon">🎉</div>
-            <h2>予約確認</h2>
-            <p>
-                以下の内容で予約を確定しますか?<br><br>
-                <strong>日時:</strong> <span id="confirmDate"></span><br>
-                <strong>時間帯:</strong> <span id="confirmTime"></span><br>
-                <strong>利用時間:</strong> <span id="confirmDuration"></span><br>
-                <strong>金額:</strong> <span id="confirmPrice"></span>
-            </p>
-            <div class="modal-actions">
-                <button class="btn btn-secondary" id="cancelBtn">キャンセル</button>
-                <button class="btn btn-primary" id="confirmBtn">予約を確定</button>
+                <div class="form-group">
+                    <label>利用時間</label>
+                    <select id="bookingDuration">
+                        <option value="">選択してください</option>
+                        <option value="1">1時間 - ¥4,500</option>
+                        <option value="2">2時間 - ¥9,000</option>
+                        <option value="3">3時間 - ¥13,500</option>
+                        <option value="4">4時間 - ¥18,000</option>
+                    </select>
+                </div>
+
+                <button class="btn-book" onclick="showBookingModal()">今すぐ予約</button>
+                <button class="btn-message">💬 メッセージを送る</button>
+
+                <div style="background: #FFF5F5; padding: 1rem; border-radius: 10px; margin-top: 1.5rem;">
+                    <div class="info-item">🛡️ Stripe安全決済</div>
+                    <div class="info-item">📅 24時間前まで無料キャンセル</div>
+                    <div class="info-item">✉️ 自動インボイス発行</div>
+                    <div class="info-item">💬 チャット機能で質問可能</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Success Modal -->
-    <div class="modal" id="successModal">
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">🎉</div>
+            <h2>予約確認</h2>
+            <p>以下の内容で予約を確定しますか?<br><br>
+            <strong>日時:</strong> <span id="confirmDate">-</span><br>
+            <strong>時間帯:</strong> <span id="confirmTime">-</span><br>
+            <strong>利用時間:</strong> <span id="confirmDuration">-</span><br>
+            <strong>金額:</strong> <span id="confirmPrice">-</span></p>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">キャンセル</button>
+                <button class="btn btn-primary" onclick="confirmBooking()">予約を確定</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
         <div class="modal-content">
             <div class="modal-icon">✅</div>
             <h2>予約が完了しました!</h2>
-            <p>
-                予約確認メールを送信しました。<br>
-                マイページから予約の詳細を確認できます。<br><br>
-                提供者とのチャットも開始できます。
-            </p>
+            <p>予約確認メールを送信しました。<br>マイページから予約の詳細を確認できます。</p>
             <div class="modal-actions">
-                <button class="btn btn-secondary" onclick="window.location.href='search.html'">検索に戻る</button>
-                <button class="btn btn-primary" onclick="window.location.href='dashboard.html'">マイページへ</button>
+                <button class="btn btn-secondary" onclick="location.href='search.html'">検索に戻る</button>
+                <button class="btn btn-primary" onclick="location.href='dashboard.html'">マイページへ</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Set minimum date to today
-        const dateInput = document.getElementById('bookingDate');
-        const today = new Date().toISOString().split('T')[0];
-        dateInput.min = today;
+        document.getElementById('bookingDate').min = new Date().toISOString().split('T')[0];
 
-        // Booking button
-        document.getElementById('bookBtn').addEventListener('click', () => {
+        function showBookingModal() {
             const date = document.getElementById('bookingDate').value;
             const time = document.getElementById('bookingTime').value;
             const duration = document.getElementById('bookingDuration').value;
@@ -873,37 +242,27 @@
                 return;
             }
 
-            // Show confirmation modal
             const timeText = document.getElementById('bookingTime').selectedOptions[0].text;
-            const durationText = document.getElementById('bookingDuration').selectedOptions[0].text;
-            
+            const price = 4500 * parseInt(duration);
+
             document.getElementById('confirmDate').textContent = date;
             document.getElementById('confirmTime').textContent = timeText;
             document.getElementById('confirmDuration').textContent = duration + '時間';
-            document.getElementById('confirmPrice').textContent = '¥' + (4500 * parseInt(duration)).toLocaleString();
-            
-            document.getElementById('bookingModal').classList.add('active');
-        });
+            document.getElementById('confirmPrice').textContent = '¥' + price.toLocaleString();
 
-        // Cancel booking
-        document.getElementById('cancelBtn').addEventListener('click', () => {
-            document.getElementById('bookingModal').classList.remove('active');
-        });
+            document.getElementById('bookingModal').classList.add('show');
+        }
 
-        // Confirm booking
-        document.getElementById('confirmBtn').addEventListener('click', () => {
-            document.getElementById('bookingModal').classList.remove('active');
-            
-            // Simulate payment processing
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('show');
+        }
+
+        function confirmBooking() {
+            closeModal();
             setTimeout(() => {
-                document.getElementById('successModal').classList.add('active');
+                document.getElementById('successModal').classList.add('show');
             }, 500);
-        });
-
-        // Message button
-        document.getElementById('messageBtn').addEventListener('click', () => {
-            alert('チャット機能は開発中です。予約後にご利用いただけます。');
-        });
+        }
     </script>
 </body>
 </html>

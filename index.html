@@ -4,24 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillLink - 海外在住日本人のためのスキルシェアプラットフォーム</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #FF4757;
-            --primary-dark: #E63946;
-            --primary-light: #FF6B7A;
-            --secondary: #FF8A5B;
-            --accent: #FFA07A;
-            --bg-light: #FFF5F5;
-            --bg-white: #FFFFFF;
-            --text-dark: #2D3436;
-            --text-gray: #636E72;
-            --text-light: #B2BEC3;
-            --success: #00D2A5;
-            --shadow: rgba(255, 71, 87, 0.15);
-            --shadow-strong: rgba(255, 71, 87, 0.25);
-        }
-        
         * {
             margin: 0;
             padding: 0;
@@ -29,540 +12,352 @@
         }
         
         body {
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+            color: #2D3436;
             line-height: 1.6;
-            background: var(--bg-light);
-            overflow-x: hidden;
+            background: #FFF5F5;
         }
         
-        /* Header */
         header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 20px var(--shadow);
+            background: white;
+            box-shadow: 0 2px 10px rgba(255, 71, 87, 0.1);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            animation: slideDown 0.5s ease;
-        }
-        
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            z-index: 100;
         }
         
         nav {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: 1rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         
         .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #FF4757;
         }
         
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
+            display: none;
         }
         
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
         }
         
         .btn {
-            padding: 0.7rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 600;
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
             text-decoration: none;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: bold;
+            text-align: center;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #FF4757, #FF8A5B);
             color: white;
-            box-shadow: 0 4px 15px var(--shadow);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px var(--shadow-strong);
         }
         
         .btn-outline {
-            background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            background: white;
+            color: #FF4757;
+            border: 2px solid #FF4757;
         }
         
-        .btn-outline:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
-            padding: 5rem 2rem;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(135deg, #FFF5F5, #FFE8E8);
+            padding: 2rem 1rem;
         }
         
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 71, 87, 0.1) 0%, transparent 70%);
-            animation: pulse 8s ease-in-out infinite;
+        .hero h1 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+        .highlight {
+            color: #FF4757;
         }
         
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-text h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            line-height: 1.2;
+        .hero p {
+            color: #636E72;
             margin-bottom: 1.5rem;
-            color: var(--text-dark);
-            animation: fadeInUp 0.8s ease;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero-text h1 .highlight {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-text p {
-            font-size: 1.25rem;
-            color: var(--text-gray);
-            margin-bottom: 2.5rem;
-            animation: fadeInUp 0.8s ease 0.2s both;
         }
         
         .hero-cta {
             display: flex;
-            gap: 1rem;
-            animation: fadeInUp 0.8s ease 0.4s both;
-        }
-        
-        .hero-visual {
-            position: relative;
-            animation: fadeInUp 0.8s ease 0.3s both;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
         }
         
         .ai-badge {
             background: white;
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px var(--shadow);
-            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             display: flex;
-            align-items: center;
             gap: 1rem;
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        
-        .ai-badge:nth-child(2) {
-            animation-delay: 0.5s;
-            margin-left: 2rem;
-        }
-        
-        .ai-badge:nth-child(3) {
-            animation-delay: 1s;
-            margin-left: 4rem;
+            margin-bottom: 0.8rem;
         }
         
         .ai-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FF4757, #FF8A5B);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            flex-shrink: 0;
+            font-size: 1.2rem;
         }
         
-        .ai-badge-content h3 {
-            font-size: 1rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
+        .ai-badge h3 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
         }
         
-        .ai-badge-content p {
-            font-size: 0.85rem;
-            color: var(--text-gray);
+        .ai-badge p {
+            font-size: 0.75rem;
+            color: #636E72;
             margin: 0;
         }
         
-        /* Features Section */
-        .features {
-            padding: 5rem 2rem;
-            background: var(--bg-white);
-        }
-        
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        section {
+            padding: 2rem 1rem;
         }
         
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 2rem;
         }
         
         .section-header h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
         }
         
         .section-header p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto;
+            color: #636E72;
         }
         
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            gap: 1rem;
         }
         
         .feature-card {
-            background: var(--bg-light);
-            padding: 2.5rem;
-            border-radius: 20px;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px var(--shadow);
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
         }
         
         .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 16px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #FF4757, #FF8A5B);
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.5rem;
             margin-bottom: 1rem;
         }
         
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
         .feature-card p {
-            color: var(--text-gray);
-            line-height: 1.8;
-        }
-        
-        /* Categories Section */
-        .categories {
-            padding: 5rem 2rem;
-            background: var(--bg-light);
-        }
-        
-        .categories-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            color: #636E72;
+            font-size: 0.9rem;
         }
         
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
         }
         
         .category-card {
             background: white;
-            padding: 2rem;
-            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            border-radius: 12px;
             text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
             text-decoration: none;
-            color: var(--text-dark);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px var(--shadow);
+            color: #2D3436;
         }
         
         .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .category-card h3 {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 2rem;
             margin-bottom: 0.5rem;
         }
         
-        .category-card p {
-            font-size: 0.9rem;
-            color: var(--text-gray);
+        .category-card h3 {
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
         }
         
-        /* Stats Section */
+        .category-card p {
+            font-size: 0.8rem;
+            color: #636E72;
+        }
+        
         .stats {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #FF4757, #FF8A5B);
             color: white;
         }
         
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
             text-align: center;
         }
         
         .stat-item h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
+            font-size: 2rem;
+            font-weight: bold;
         }
         
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.95;
-        }
-        
-        /* CTA Section */
-        .cta {
-            padding: 5rem 2rem;
-            background: var(--bg-white);
-        }
-        
-        .cta-container {
-            max-width: 800px;
-            margin: 0 auto;
+        .cta-box {
+            background: linear-gradient(135deg, #FFF5F5, #FFE8E8);
+            padding: 2rem;
+            border-radius: 15px;
             text-align: center;
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
-            padding: 4rem 3rem;
-            border-radius: 30px;
         }
         
-        .cta-container h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
+        .cta-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .cta-box p {
+            color: #636E72;
             margin-bottom: 1.5rem;
-        }
-        
-        .cta-container p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            margin-bottom: 2.5rem;
         }
         
         .cta-buttons {
             display: flex;
-            gap: 1rem;
-            justify-content: center;
+            flex-direction: column;
+            gap: 0.8rem;
         }
         
-        /* Footer */
         footer {
-            background: var(--text-dark);
+            background: #2D3436;
             color: white;
-            padding: 3rem 2rem 1.5rem;
+            padding: 2rem 1rem;
         }
         
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
+        .footer-section {
+            margin-bottom: 1.5rem;
         }
         
         .footer-section h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
         
         .footer-section ul {
             list-style: none;
         }
         
-        .footer-section ul li {
-            margin-bottom: 0.7rem;
-        }
-        
         .footer-section a {
-            color: var(--text-light);
+            color: #B2BEC3;
             text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-section a:hover {
-            color: var(--accent);
         }
         
         .footer-bottom {
             text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #B2BEC3;
+            font-size: 0.9rem;
         }
         
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--text-dark);
-            cursor: pointer;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
+        @media (min-width: 768px) {
+            nav {
+                padding: 1.2rem 2rem;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
+            }
+            
             .nav-links {
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+            }
+            
+            .nav-links a {
+                text-decoration: none;
+                color: #2D3436;
+                font-weight: 500;
+            }
+            
+            .menu-btn {
                 display: none;
             }
             
-            .mobile-menu-btn {
-                display: block;
+            .hero {
+                padding: 4rem 2rem;
             }
             
             .hero-content {
-                grid-template-columns: 1fr;
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
                 gap: 3rem;
             }
             
-            .hero-text h1 {
-                font-size: 2.5rem;
+            .hero h1 {
+                font-size: 3rem;
             }
             
             .hero-cta {
-                flex-direction: column;
+                flex-direction: row;
             }
             
-            .btn {
-                width: 100%;
-                text-align: center;
+            section {
+                padding: 4rem 2rem;
             }
             
-            .features-grid,
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+            
             .categories-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(4, 1fr);
             }
             
-            .stats-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
             }
             
             .cta-buttons {
-                flex-direction: column;
+                flex-direction: row;
+                justify-content: center;
             }
             
             .footer-grid {
-                grid-template-columns: 1fr;
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
                 gap: 2rem;
             }
         }
@@ -572,45 +367,45 @@
     <header>
         <nav>
             <div class="logo">SkillLink</div>
-            <ul class="nav-links">
-                <li><a href="search.html">サービスを探す</a></li>
-                <li><a href="create-listing.html">出品する</a></li>
-                <li><a href="#how-it-works">使い方</a></li>
-                <li><a href="#" class="btn btn-outline">ログイン</a></li>
-                <li><a href="#" class="btn btn-primary">無料登録</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="search.html">サービスを探す</a>
+                <a href="create-listing.html">出品する</a>
+                <a href="#">使い方</a>
+                <a href="#" class="btn btn-outline">ログイン</a>
+                <a href="#" class="btn btn-primary">無料登録</a>
+            </div>
+            <button class="menu-btn">☰</button>
         </nav>
     </header>
 
     <section class="hero">
         <div class="hero-content">
-            <div class="hero-text">
+            <div>
                 <h1>海外で暮らす<br><span class="highlight">小さなスキル</span>が<br>誰かの大きな助けに</h1>
-                <p>AI搭載のスキルシェアプラットフォーム。3分で出品、即購入、安全決済。海外在住日本人のためのC2Cマーケットプレイス。</p>
+                <p>AI搭載のスキルシェアプラットフォーム。3分で出品、即購入、安全決済。</p>
                 <div class="hero-cta">
                     <a href="create-listing.html" class="btn btn-primary">今すぐ出品する</a>
                     <a href="search.html" class="btn btn-outline">サービスを探す</a>
                 </div>
             </div>
-            <div class="hero-visual">
+            <div>
                 <div class="ai-badge">
                     <div class="ai-icon">🤖</div>
-                    <div class="ai-badge-content">
+                    <div>
                         <h3>AI自動価格設定</h3>
                         <p>市場を分析して最適価格を提案</p>
                     </div>
                 </div>
                 <div class="ai-badge">
                     <div class="ai-icon">✨</div>
-                    <div class="ai-badge-content">
+                    <div>
                         <h3>AI紹介文生成</h3>
                         <p>魅力的な説明文を自動作成</p>
                     </div>
                 </div>
                 <div class="ai-badge">
                     <div class="ai-icon">🎯</div>
-                    <div class="ai-badge-content">
+                    <div>
                         <h3>AIマッチング</h3>
                         <p>最適なサービスを瞬時に検索</p>
                     </div>
@@ -619,100 +414,96 @@
         </div>
     </section>
 
-    <section class="features">
-        <div class="features-container">
-            <div class="section-header">
-                <h2>SkillLinkの特徴</h2>
-                <p>AIフル活用で、出品も購入も驚くほど簡単に</p>
+    <section style="background: white;">
+        <div class="section-header">
+            <h2>SkillLinkの特徴</h2>
+            <p>AIフル活用で、出品も購入も驚くほど簡単に</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>3分で出品完了</h3>
+                <p>AIがプロフィールと紹介文を自動生成。初心者でも魅力的なサービスページをすぐに作成できます。</p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>3分で出品完了</h3>
-                    <p>AIがプロフィールと紹介文を自動生成。初心者でも魅力的なサービスページをすぐに作成できます。</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💰</div>
-                    <h3>AI価格提案</h3>
-                    <p>類似サービスを分析して適正価格を自動提案。市場相場を知らなくても安心して価格設定できます。</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔍</div>
-                    <h3>AI会話型検索</h3>
-                    <p>「ベルリンで子供の送迎を手伝ってほしい」と話しかけるだけ。AIが最適なサービスを瞬時に見つけます。</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>安全な決済システム</h3>
-                    <p>Stripe連携で世界基準のセキュリティ。エスクロー機能でサービス完了まで代金を保護します。</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📅</div>
-                    <h3>統合スケジュール</h3>
-                    <p>予約、チャット、決済が一つのプラットフォームに。複雑なやり取りなしで即購入可能です。</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>レビュー & バッジ</h3>
-                    <p>実績に応じたバッジで信頼を可視化。AIがレビューを要約し、品質の高いサービスを簡単に見つけられます。</p>
-                </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>AI価格提案</h3>
+                <p>類似サービスを分析して適正価格を自動提案。市場相場を知らなくても安心して価格設定できます。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔍</div>
+                <h3>AI会話型検索</h3>
+                <p>話しかけるだけでAIが最適なサービスを瞬時に見つけます。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3>安全な決済システム</h3>
+                <p>Stripe連携で世界基準のセキュリティ。エスクロー機能でサービス完了まで代金を保護します。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📅</div>
+                <h3>統合スケジュール</h3>
+                <p>予約、チャット、決済が一つのプラットフォームに。複雑なやり取りなしで即購入可能です。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3>レビュー & バッジ</h3>
+                <p>実績に応じたバッジで信頼を可視化。AIがレビューを要約し、品質の高いサービスを簡単に見つけられます。</p>
             </div>
         </div>
     </section>
 
-    <section class="categories">
-        <div class="categories-container">
-            <div class="section-header">
-                <h2>人気カテゴリー</h2>
-                <p>あなたのスキルがきっと誰かの役に立つ</p>
-            </div>
-            <div class="categories-grid">
-                <a href="search.html?category=support" class="category-card">
-                    <div class="category-icon">🚗</div>
-                    <h3>同行サポート</h3>
-                    <p>買い物、送迎、移動の付き添い</p>
-                </a>
-                <a href="search.html?category=life" class="category-card">
-                    <div class="category-icon">🏠</div>
-                    <h3>現地生活サポート</h3>
-                    <p>移住相談、生活アドバイス</p>
-                </a>
-                <a href="search.html?category=travel" class="category-card">
-                    <div class="category-icon">✈️</div>
-                    <h3>旅行サポート</h3>
-                    <p>観光プラン、現地ガイド</p>
-                </a>
-                <a href="search.html?category=language" class="category-card">
-                    <div class="category-icon">💬</div>
-                    <h3>語学レッスン</h3>
-                    <p>会話練習、発音チェック</p>
-                </a>
-                <a href="search.html?category=hobby" class="category-card">
-                    <div class="category-icon">🎨</div>
-                    <h3>趣味・文化</h3>
-                    <p>音楽、料理、アートレッスン</p>
-                </a>
-                <a href="search.html?category=childcare" class="category-card">
-                    <div class="category-icon">👶</div>
-                    <h3>子育てサポート</h3>
-                    <p>ベビーシッター、送迎</p>
-                </a>
-                <a href="search.html?category=business" class="category-card">
-                    <div class="category-icon">💼</div>
-                    <h3>ビジネス支援</h3>
-                    <p>翻訳、資料作成</p>
-                </a>
-                <a href="search.html?category=consulting" class="category-card">
-                    <div class="category-icon">📚</div>
-                    <h3>相談・コンサル</h3>
-                    <p>留学、キャリア、ライフプラン</p>
-                </a>
-            </div>
+    <section>
+        <div class="section-header">
+            <h2>人気カテゴリー</h2>
+            <p>あなたのスキルがきっと誰かの役に立つ</p>
+        </div>
+        <div class="categories-grid">
+            <a href="search.html" class="category-card">
+                <div class="category-icon">🚗</div>
+                <h3>同行サポート</h3>
+                <p>買い物、送迎、移動の付き添い</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">🏠</div>
+                <h3>現地生活サポート</h3>
+                <p>移住相談、生活アドバイス</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">✈️</div>
+                <h3>旅行サポート</h3>
+                <p>観光プラン、現地ガイド</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">💬</div>
+                <h3>語学レッスン</h3>
+                <p>会話練習、発音チェック</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">🎨</div>
+                <h3>趣味・文化</h3>
+                <p>音楽、料理、アート</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">👶</div>
+                <h3>子育てサポート</h3>
+                <p>ベビーシッター、送迎</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">💼</div>
+                <h3>ビジネス支援</h3>
+                <p>翻訳、資料作成</p>
+            </a>
+            <a href="search.html" class="category-card">
+                <div class="category-icon">📚</div>
+                <h3>相談・コンサル</h3>
+                <p>留学、キャリア</p>
+            </a>
         </div>
     </section>
 
     <section class="stats">
-        <div class="stats-container">
+        <div class="stats-grid">
             <div class="stat-item">
                 <h3>50+</h3>
                 <p>対応都市</p>
@@ -726,14 +517,14 @@
                 <p>満足度</p>
             </div>
             <div class="stat-item">
-                <h3>24時間</h3>
-                <p>平均マッチング時間</p>
+                <h3>24h</h3>
+                <p>平均マッチング</p>
             </div>
         </div>
     </section>
 
-    <section class="cta">
-        <div class="cta-container">
+    <section style="background: white;">
+        <div class="cta-box">
             <h2>今すぐ始めよう</h2>
             <p>登録無料。あなたのスキルを世界中の日本人コミュニティとシェアしましょう。</p>
             <div class="cta-buttons">
@@ -744,40 +535,35 @@
     </section>
 
     <footer>
-        <div class="footer-container">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h4>SkillLink</h4>
-                    <p>海外在住日本人のための<br>スキルシェアプラットフォーム</p>
-                </div>
-                <div class="footer-section">
-                    <h4>サービス</h4>
-                    <ul>
-                        <li><a href="search.html">サービスを探す</a></li>
-                        <li><a href="create-listing.html">出品する</a></li>
-                        <li><a href="#">カテゴリー一覧</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>サポート</h4>
-                    <ul>
-                        <li><a href="#">ヘルプセンター</a></li>
-                        <li><a href="#">安全ガイド</a></li>
-                        <li><a href="#">お問い合わせ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>会社情報</h4>
-                    <ul>
-                        <li><a href="#">私たちについて</a></li>
-                        <li><a href="#">利用規約</a></li>
-                        <li><a href="#">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>SkillLink</h4>
+                <p>海外在住日本人のためのスキルシェアプラットフォーム</p>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 SkillLink. All rights reserved.</p>
+            <div class="footer-section">
+                <h4>サービス</h4>
+                <ul>
+                    <li><a href="search.html">サービスを探す</a></li>
+                    <li><a href="create-listing.html">出品する</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h4>サポート</h4>
+                <ul>
+                    <li><a href="#">ヘルプセンター</a></li>
+                    <li><a href="#">お問い合わせ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>会社情報</h4>
+                <ul>
+                    <li><a href="#">利用規約</a></li>
+                    <li><a href="#">プライバシーポリシー</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SkillLink. All rights reserved.</p>
         </div>
     </footer>
 </body>

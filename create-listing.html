@@ -4,649 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サービスを出品 - SkillLink</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #FF4757;
-            --primary-dark: #E63946;
-            --primary-light: #FF6B7A;
-            --secondary: #FF8A5B;
-            --accent: #FFA07A;
-            --bg-light: #FFF5F5;
-            --bg-white: #FFFFFF;
-            --text-dark: #2D3436;
-            --text-gray: #636E72;
-            --text-light: #B2BEC3;
-            --success: #00D2A5;
-            --shadow: rgba(255, 71, 87, 0.15);
-            --shadow-strong: rgba(255, 71, 87, 0.25);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Noto Sans JP', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            background: var(--bg-light);
-        }
-        
-        /* Header */
-        header {
-            background: var(--bg-white);
-            box-shadow: 0 2px 20px var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1.2rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -1px;
-            text-decoration: none;
-        }
-        
-        .nav-back {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-back:hover {
-            color: var(--primary);
-        }
-        
-        /* Main Container */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-        }
-        
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .page-header h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-        
-        .page-header p {
-            font-size: 1.1rem;
-            color: var(--text-gray);
-        }
-        
-        /* Progress Steps */
-        .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .progress-steps::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--text-light);
-            z-index: 0;
-        }
-        
-        .progress-line {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            z-index: 1;
-            transition: width 0.5s ease;
-        }
-        
-        .step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .step-circle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--bg-white);
-            border: 3px solid var(--text-light);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-        
-        .step.active .step-circle {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-color: var(--primary);
-            color: white;
-        }
-        
-        .step.completed .step-circle {
-            background: var(--success);
-            border-color: var(--success);
-            color: white;
-        }
-        
-        .step-label {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            font-weight: 500;
-        }
-        
-        .step.active .step-label {
-            color: var(--primary);
-            font-weight: 700;
-        }
-        
-        /* Form */
-        .form-section {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-            margin-bottom: 2rem;
-        }
-        
-        .form-section h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-        
-        .label-optional {
-            font-weight: 400;
-            color: var(--text-gray);
-            font-size: 0.9rem;
-        }
-        
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 0.9rem;
-            border: 2px solid #E8E8E8;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-family: 'Noto Sans JP', sans-serif;
-            transition: all 0.3s;
-        }
-        
-        input:focus,
-        textarea:focus,
-        select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--shadow);
-        }
-        
-        textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .help-text {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            margin-top: 0.4rem;
-        }
-        
-        /* AI Features */
-        .ai-section {
-            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
-            border: 2px solid var(--primary-light);
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .ai-header {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1rem;
-        }
-        
-        .ai-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-        }
-        
-        .ai-header h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-        }
-        
-        .ai-button {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .ai-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px var(--shadow-strong);
-        }
-        
-        .ai-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .ai-result {
-            background: white;
-            padding: 1.2rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            border: 2px solid var(--primary-light);
-            animation: slideIn 0.4s ease;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .ai-result-label {
-            font-weight: 600;
-            color: var(--primary);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-        
-        .ai-result-content {
-            color: var(--text-dark);
-            line-height: 1.8;
-        }
-        
-        .ai-actions {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 1rem;
-        }
-        
-        .btn-small {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-        }
-        
-        .btn-apply {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-regenerate {
-            background: white;
-            color: var(--primary);
-            border: 2px solid var(--primary);
-        }
-        
-        .btn-apply:hover,
-        .btn-regenerate:hover {
-            transform: translateY(-2px);
-        }
-        
-        /* Loading Animation */
-        .loading {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        .loading-dots {
-            display: flex;
-            gap: 0.3rem;
-        }
-        
-        .loading-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--primary);
-            border-radius: 50%;
-            animation: bounce 1.4s infinite ease-in-out;
-        }
-        
-        .loading-dot:nth-child(1) {
-            animation-delay: -0.32s;
-        }
-        
-        .loading-dot:nth-child(2) {
-            animation-delay: -0.16s;
-        }
-        
-        @keyframes bounce {
-            0%, 80%, 100% {
-                transform: scale(0);
-            }
-            40% {
-                transform: scale(1);
-            }
-        }
-        
-        /* Price Suggestions */
-        .price-suggestions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .price-card {
-            background: white;
-            padding: 1.2rem;
-            border-radius: 10px;
-            border: 2px solid var(--primary-light);
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .price-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px var(--shadow);
-        }
-        
-        .price-card.recommended {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #FFF5F5 0%, white 100%);
-        }
-        
-        .price-label {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            margin-bottom: 0.3rem;
-        }
-        
-        .price-amount {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary);
-            font-family: 'Outfit', sans-serif;
-        }
-        
-        .price-note {
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            margin-top: 0.3rem;
-        }
-        
-        .recommended-badge {
-            display: inline-block;
-            background: var(--primary);
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            font-weight: 700;
-            margin-top: 0.5rem;
-        }
-        
-        /* Radio Buttons */
-        .radio-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        
-        .radio-item {
-            flex: 1;
-            min-width: 150px;
-        }
-        
-        .radio-item input[type="radio"] {
-            display: none;
-        }
-        
-        .radio-label {
-            display: block;
-            padding: 1rem;
-            border: 2px solid #E8E8E8;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: center;
-        }
-        
-        .radio-item input[type="radio"]:checked + .radio-label {
-            border-color: var(--primary);
-            background: linear-gradient(135deg, #FFF5F5 0%, white 100%);
-        }
-        
-        /* Form Navigation */
-        .form-navigation {
-            display: flex;
-            gap: 1rem;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
-        
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            font-family: 'Noto Sans JP', sans-serif;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            flex: 1;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px var(--shadow-strong);
-        }
-        
-        .btn-secondary {
-            background: white;
-            color: var(--text-dark);
-            border: 2px solid #E8E8E8;
-        }
-        
-        .btn-secondary:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
-        /* Tags Input */
-        .tags-input-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            padding: 0.7rem;
-            border: 2px solid #E8E8E8;
-            border-radius: 10px;
-            min-height: 50px;
-        }
-        
-        .tag {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .tag-remove {
-            cursor: pointer;
-            font-weight: 700;
-        }
-        
-        .tag-input {
-            border: none;
-            outline: none;
-            flex: 1;
-            min-width: 120px;
-            font-size: 1rem;
-        }
-        
-        /* Preview Section */
-        .preview-section {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-        }
-        
-        .preview-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-        
-        .preview-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-        
-        .preview-info h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-        }
-        
-        .preview-rating {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-gray);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 2rem 1rem;
-            }
-            
-            .page-header h1 {
-                font-size: 2rem;
-            }
-            
-            .progress-steps {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-            
-            .step-label {
-                font-size: 0.75rem;
-            }
-            
-            .form-section {
-                padding: 1.5rem;
-            }
-            
-            .price-suggestions {
-                grid-template-columns: 1fr;
-            }
-            
-            .radio-group {
-                flex-direction: column;
-            }
-            
-            .form-navigation {
-                flex-direction: column-reverse;
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", Meiryo, sans-serif;
+            color: #2D3436; 
+            background: #FFF5F5; 
+        }
+        header { background: white; box-shadow: 0 2px 10px rgba(255,71,87,0.1); position: sticky; top: 0; z-index: 100; }
+        nav { max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #FF4757; text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        h1 { font-size: 1.8rem; margin-bottom: 0.5rem; text-align: center; }
+        .subtitle { text-align: center; color: #636E72; margin-bottom: 2rem; }
+        .form-section { background: white; padding: 1.5rem; border-radius: 15px; margin-bottom: 1.5rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .form-section h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        label { display: block; font-weight: bold; margin-bottom: 0.4rem; }
+        input, textarea, select { width: 100%; padding: 0.8rem; border: 2px solid #E8E8E8; border-radius: 8px; font-size: 1rem; font-family: inherit; }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: #FF4757; }
+        textarea { min-height: 100px; resize: vertical; }
+        .help-text { font-size: 0.85rem; color: #636E72; margin-top: 0.3rem; }
+        .radio-group { display: flex; gap: 0.8rem; flex-wrap: wrap; }
+        .radio-item { flex: 1; min-width: 120px; }
+        .radio-item input { display: none; }
+        .radio-label { display: block; padding: 0.8rem; border: 2px solid #E8E8E8; border-radius: 8px; text-align: center; cursor: pointer; }
+        .radio-item input:checked + .radio-label { border-color: #FF4757; background: #FFF5F5; }
+        .ai-section { background: linear-gradient(135deg, #FFF5F5, #FFE8E8); padding: 1.2rem; border-radius: 12px; margin-top: 1rem; }
+        .ai-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+        .ai-icon { width: 40px; height: 40px; background: linear-gradient(135deg, #FF4757, #FF8A5B); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+        .ai-button { width: 100%; padding: 0.9rem; background: linear-gradient(135deg, #FF4757, #FF8A5B); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        .ai-result { background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem; display: none; }
+        .ai-result.show { display: block; }
+        .ai-result-content { color: #2D3436; line-height: 1.7; margin: 0.8rem 0; }
+        .loading { text-align: center; color: #FF4757; padding: 1rem; display: none; }
+        .loading.show { display: block; }
+        .btn-small { padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; font-size: 0.9rem; margin-right: 0.5rem; }
+        .btn-apply { background: #00D2A5; color: white; }
+        .btn-regenerate { background: white; color: #FF4757; border: 2px solid #FF4757; }
+        .price-suggestions { display: grid; gap: 0.8rem; margin-top: 1rem; }
+        .price-card { background: white; padding: 1rem; border-radius: 8px; border: 2px solid #FF8A5B; text-align: center; cursor: pointer; }
+        .price-card.recommended { border-color: #FF4757; background: #FFF5F5; }
+        .price-amount { font-size: 1.8rem; font-weight: bold; color: #FF4757; }
+        .recommended-badge { background: #FF4757; color: white; font-size: 0.7rem; padding: 0.2rem 0.6rem; border-radius: 10px; display: inline-block; margin-top: 0.3rem; }
+        .btn-primary { width: 100%; padding: 1rem; background: linear-gradient(135deg, #FF4757, #FF8A5B); color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1.1rem; cursor: pointer; }
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .form-section { padding: 2rem; }
+            .price-suggestions { grid-template-columns: repeat(3, 1fr); }
         }
     </style>
 </head>
@@ -654,40 +59,21 @@
     <header>
         <nav>
             <a href="index.html" class="logo">SkillLink</a>
-            <a href="index.html" class="nav-back">← ホームに戻る</a>
+            <a href="index.html" style="text-decoration: none; color: #2D3436;">← ホーム</a>
         </nav>
     </header>
 
     <div class="container">
-        <div class="page-header">
-            <h1>サービスを出品</h1>
-            <p>AIがサポートするので、初心者でも簡単に魅力的なサービスを出品できます</p>
-        </div>
+        <h1>サービスを出品</h1>
+        <p class="subtitle">AIがサポートするので、初心者でも簡単に魅力的なサービスを出品できます</p>
 
-        <div class="progress-steps">
-            <div class="progress-line" id="progressLine" style="width: 33%"></div>
-            <div class="step active" data-step="1">
-                <div class="step-circle">1</div>
-                <span class="step-label">基本情報</span>
-            </div>
-            <div class="step" data-step="2">
-                <div class="step-circle">2</div>
-                <span class="step-label">詳細設定</span>
-            </div>
-            <div class="step" data-step="3">
-                <div class="step-circle">3</div>
-                <span class="step-label">確認</span>
-            </div>
-        </div>
-
-        <!-- Step 1: Basic Info -->
-        <div class="form-section" id="step1">
+        <div class="form-section">
             <h2>📝 基本情報</h2>
             
             <div class="form-group">
                 <label>サービスのタイトル</label>
-                <input type="text" id="serviceTitle" placeholder="例: ベルリン市内の同行サポート（買い物・送迎）" maxlength="60">
-                <p class="help-text">分かりやすく、具体的なタイトルをつけましょう（60文字以内）</p>
+                <input type="text" id="serviceTitle" placeholder="例: ベルリン市内の同行サポート（買い物・送迎）">
+                <p class="help-text">分かりやすく、具体的なタイトルをつけましょう</p>
             </div>
 
             <div class="form-group">
@@ -710,39 +96,11 @@
                 <div class="radio-group">
                     <div class="radio-item">
                         <input type="radio" id="formatOnline" name="format" value="online">
-                        <label for="formatOnline" class="radio-label">
-                            💻 オンライン
-                        </label>
+                        <label for="formatOnline" class="radio-label">💻 オンライン</label>
                     </div>
                     <div class="radio-item">
                         <input type="radio" id="formatInPerson" name="format" value="in-person">
-                        <label for="formatInPerson" class="radio-label">
-                            🤝 対面
-                        </label>
-                    </div>
-                    <div class="radio-item">
-                        <input type="radio" id="formatBoth" name="format" value="both">
-                        <label for="formatBoth" class="radio-label">
-                            ⚡ 両方OK
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label>サービスタイプ</label>
-                <div class="radio-group">
-                    <div class="radio-item">
-                        <input type="radio" id="typeSession" name="type" value="session">
-                        <label for="typeSession" class="radio-label">
-                            ⏰ 時間制セッション
-                        </label>
-                    </div>
-                    <div class="radio-item">
-                        <input type="radio" id="typeFixed" name="type" value="fixed">
-                        <label for="typeFixed" class="radio-label">
-                            📦 固定成果物
-                        </label>
+                        <label for="formatInPerson" class="radio-label">🤝 対面</label>
                     </div>
                 </div>
             </div>
@@ -752,45 +110,30 @@
                 <input type="text" id="serviceLocation" placeholder="例: ベルリン、ドイツ">
             </div>
 
-            <!-- AI Description Generator -->
             <div class="ai-section">
                 <div class="ai-header">
                     <div class="ai-icon">✨</div>
-                    <h3>AI紹介文生成</h3>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.1rem;">AI紹介文生成</h3>
+                        <p style="margin: 0; font-size: 0.85rem; color: #636E72;">キーワードを入力するだけで、魅力的な紹介文を自動生成</p>
+                    </div>
                 </div>
-                <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                    キーワードを入力するだけで、AIが魅力的な紹介文を自動生成します
-                </p>
                 
                 <div class="form-group">
                     <label>キーワード（3〜5個）</label>
                     <input type="text" id="aiKeywords" placeholder="例: ドイツ生活10年、子育て経験、日本語教師資格">
                 </div>
                 
-                <button class="ai-button" id="generateDescBtn">
-                    <span>🤖</span>
-                    <span>AI紹介文を生成</span>
-                </button>
+                <button class="ai-button" onclick="generateDescription()">🤖 AI紹介文を生成</button>
                 
-                <div id="aiDescResult" style="display: none;">
-                    <div class="ai-result">
-                        <div class="ai-result-label">✨ AI生成結果</div>
-                        <div class="ai-result-content" id="generatedDesc"></div>
-                        <div class="ai-actions">
-                            <button class="btn-small btn-apply" id="applyDescBtn">この文章を使用</button>
-                            <button class="btn-small btn-regenerate" id="regenerateDescBtn">再生成</button>
-                        </div>
-                    </div>
-                </div>
+                <div id="loadingDesc" class="loading">AIが紹介文を生成中...</div>
                 
-                <div id="aiDescLoading" style="display: none; margin-top: 1rem;">
-                    <div class="loading">
-                        <span>AIが紹介文を生成中</span>
-                        <div class="loading-dots">
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                        </div>
+                <div id="aiDescResult" class="ai-result">
+                    <strong style="color: #FF4757;">✨ AI生成結果</strong>
+                    <div class="ai-result-content" id="generatedDesc"></div>
+                    <div style="margin-top: 1rem;">
+                        <button class="btn-small btn-apply" onclick="applyDescription()">この文章を使用</button>
+                        <button class="btn-small btn-regenerate" onclick="generateDescription()">再生成</button>
                     </div>
                 </div>
             </div>
@@ -798,61 +141,46 @@
             <div class="form-group" style="margin-top: 1.5rem;">
                 <label>サービスの説明</label>
                 <textarea id="serviceDescription" placeholder="サービスの詳細を記入してください（AIで生成した文章はここに反映されます）"></textarea>
-                <p class="help-text">何ができるか、どんな人におすすめか、注意事項などを記入しましょう</p>
             </div>
         </div>
 
-        <!-- Step 2: Details -->
-        <div class="form-section" id="step2" style="display: none;">
+        <div class="form-section">
             <h2>💰 価格設定</h2>
 
-            <!-- AI Price Suggestion -->
             <div class="ai-section">
                 <div class="ai-header">
                     <div class="ai-icon">🤖</div>
-                    <h3>AI価格提案</h3>
-                </div>
-                <p style="color: var(--text-gray); margin-bottom: 1rem;">
-                    AIが類似サービスを分析して、最適な価格を提案します
-                </p>
-                
-                <button class="ai-button" id="suggestPriceBtn">
-                    <span>💡</span>
-                    <span>AI価格分析を開始</span>
-                </button>
-                
-                <div id="aiPriceLoading" style="display: none; margin-top: 1rem;">
-                    <div class="loading">
-                        <span>市場価格を分析中</span>
-                        <div class="loading-dots">
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                            <div class="loading-dot"></div>
-                        </div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.1rem;">AI価格提案</h3>
+                        <p style="margin: 0; font-size: 0.85rem; color: #636E72;">類似サービスを分析して、最適な価格を提案</p>
                     </div>
                 </div>
                 
-                <div id="aiPriceResult" style="display: none;">
+                <button class="ai-button" onclick="suggestPrice()">💡 AI価格分析を開始</button>
+                
+                <div id="loadingPrice" class="loading">市場価格を分析中...</div>
+                
+                <div id="aiPriceResult" class="ai-result">
                     <div class="price-suggestions">
-                        <div class="price-card" data-price="3000">
-                            <div class="price-label">控えめ</div>
-                            <div class="price-amount">€30</div>
-                            <div class="price-note">競争力重視</div>
+                        <div class="price-card" onclick="selectPrice(3000)">
+                            <div style="font-size: 0.8rem; color: #636E72;">控えめ</div>
+                            <div class="price-amount">¥3,000</div>
+                            <div style="font-size: 0.75rem; color: #636E72;">競争力重視</div>
                         </div>
-                        <div class="price-card recommended" data-price="4500">
-                            <div class="price-label">推奨価格</div>
-                            <div class="price-amount">€45</div>
-                            <div class="recommended-badge">おすすめ</div>
-                            <div class="price-note">市場平均</div>
+                        <div class="price-card recommended" onclick="selectPrice(4500)">
+                            <div style="font-size: 0.8rem; color: #636E72;">推奨価格</div>
+                            <div class="price-amount">¥4,500</div>
+                            <span class="recommended-badge">おすすめ</span>
+                            <div style="font-size: 0.75rem; color: #636E72;">市場平均</div>
                         </div>
-                        <div class="price-card" data-price="6000">
-                            <div class="price-label">プレミアム</div>
-                            <div class="price-amount">€60</div>
-                            <div class="price-note">高品質重視</div>
+                        <div class="price-card" onclick="selectPrice(6000)">
+                            <div style="font-size: 0.8rem; color: #636E72;">プレミアム</div>
+                            <div class="price-amount">¥6,000</div>
+                            <div style="font-size: 0.75rem; color: #636E72;">高品質重視</div>
                         </div>
                     </div>
-                    <p class="help-text" style="margin-top: 1rem; text-align: center;">
-                        💡 ベルリンの同行サポートの平均価格は €40-50/時間 です
+                    <p style="text-align: center; margin-top: 1rem; color: #636E72; font-size: 0.85rem;">
+                        💡 類似サービスの平均価格は ¥4,000-5,000 です
                     </p>
                 </div>
             </div>
@@ -860,253 +188,80 @@
             <div class="form-group" style="margin-top: 1.5rem;">
                 <label>価格設定</label>
                 <input type="number" id="servicePrice" placeholder="例: 4500" min="0" step="100">
-                <p class="help-text">金額は円建て（¥）で入力してください。AIの提案価格をクリックして自動入力もできます。</p>
-            </div>
-
-            <div class="form-group">
-                <label>所要時間・納期 <span class="label-optional">（任意）</span></label>
-                <input type="text" id="serviceDuration" placeholder="例: 2時間 / 3営業日">
-            </div>
-
-            <div class="form-group">
-                <label>タグ <span class="label-optional">（検索されやすくなります）</span></label>
-                <div class="tags-input-container" id="tagsContainer">
-                    <input type="text" class="tag-input" id="tagInput" placeholder="タグを入力してEnter">
-                </div>
-                <p class="help-text">例: ベルリン、送迎、買い物同行、ドイツ語通訳</p>
+                <p class="help-text">金額は円建て（¥）で入力してください</p>
             </div>
         </div>
 
-        <!-- Step 3: Preview -->
-        <div class="preview-section" id="step3" style="display: none;">
-            <h2>✅ 確認</h2>
-            <p style="color: var(--text-gray); margin-bottom: 2rem;">内容を確認して、問題なければ出品しましょう</p>
-            
-            <div class="preview-header">
-                <div class="preview-avatar">👤</div>
-                <div class="preview-info">
-                    <h3 id="previewTitle">サービスタイトル</h3>
-                    <div class="preview-rating">⭐⭐⭐⭐⭐ (新規出品)</div>
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label>カテゴリー</label>
-                <p id="previewCategory" style="color: var(--text-gray);"></p>
-            </div>
-            
-            <div class="form-group">
-                <label>説明</label>
-                <p id="previewDescription" style="color: var(--text-gray); line-height: 1.8;"></p>
-            </div>
-            
-            <div class="form-group">
-                <label>価格</label>
-                <p style="font-size: 2rem; font-weight: 800; color: var(--primary); font-family: 'Outfit', sans-serif;">
-                    ¥<span id="previewPrice">0</span>
-                </p>
-            </div>
-            
-            <div class="form-group">
-                <label>提供形態・タイプ</label>
-                <p id="previewFormat" style="color: var(--text-gray);"></p>
-            </div>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="form-navigation">
-            <button class="btn btn-secondary" id="prevBtn" style="display: none;">← 戻る</button>
-            <button class="btn btn-primary" id="nextBtn">次へ →</button>
-            <button class="btn btn-primary" id="submitBtn" style="display: none;">🚀 出品する</button>
-        </div>
+        <button class="btn-primary" onclick="submitService()">🚀 出品する</button>
     </div>
 
     <script>
-        // State management
-        let currentStep = 1;
-        const totalSteps = 3;
-        const tags = [];
-
-        // Sample AI generated descriptions
         const sampleDescriptions = [
-            "ベルリン在住10年の経験を活かし、現地での買い物や移動をサポートいたします。ドイツ語での交渉が必要な場面でも安心してお任せください。スーパーでの食材選びから、薬局での医薬品購入まで、日常生活のあらゆるシーンでお手伝いします。子育て経験もあるため、お子様連れの方も大歓迎です。",
-            "長年のベルリン生活で培った知識とネットワークを活用し、あなたの生活をサポートします。現地の商習慣や文化を理解しているからこそ、スムーズな同行サポートが可能です。日本語教師の資格も持っているため、言語面でのサポートも万全です。安心して現地生活を始めたい方におすすめのサービスです。",
-            "ベルリンでの日常生活をより快適にするお手伝いをいたします。買い物の同行から、公共交通機関の利用サポート、病院への付き添いまで、幅広く対応可能です。ドイツ語と日本語の両方に精通しているため、コミュニケーションの橋渡し役としてお役に立てます。初めてのドイツ生活も、これで安心です。"
+            "ベルリン在住10年の経験を活かし、現地での買い物や移動をサポートいたします。ドイツ語での交渉が必要な場面でも安心してお任せください。スーパーでの食材選びから、薬局での医薬品購入まで、日常生活のあらゆるシーンでお手伝いします。",
+            "長年のベルリン生活で培った知識とネットワークを活用し、あなたの生活をサポートします。現地の商習慣や文化を理解しているからこそ、スムーズな同行サポートが可能です。日本語教師の資格も持っているため、言語面でのサポートも万全です。",
+            "ベルリンでの日常生活をより快適にするお手伝いをいたします。買い物の同行から、公共交通機関の利用サポート、病院への付き添いまで、幅広く対応可能です。ドイツ語と日本語の両方に精通しているため、コミュニケーションの橋渡し役としてお役に立てます。"
         ];
 
-        // Step navigation
-        function updateSteps() {
-            document.querySelectorAll('.step').forEach((step, index) => {
-                const stepNum = index + 1;
-                if (stepNum < currentStep) {
-                    step.classList.add('completed');
-                    step.classList.remove('active');
-                } else if (stepNum === currentStep) {
-                    step.classList.add('active');
-                    step.classList.remove('completed');
-                } else {
-                    step.classList.remove('active', 'completed');
-                }
-            });
-
-            // Update progress line
-            const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
-            document.getElementById('progressLine').style.width = progress + '%';
-
-            // Show/hide sections
-            document.getElementById('step1').style.display = currentStep === 1 ? 'block' : 'none';
-            document.getElementById('step2').style.display = currentStep === 2 ? 'block' : 'none';
-            document.getElementById('step3').style.display = currentStep === 3 ? 'block' : 'none';
-
-            // Update buttons
-            document.getElementById('prevBtn').style.display = currentStep > 1 ? 'block' : 'none';
-            document.getElementById('nextBtn').style.display = currentStep < totalSteps ? 'block' : 'none';
-            document.getElementById('submitBtn').style.display = currentStep === totalSteps ? 'block' : 'none';
-
-            // Update preview if on step 3
-            if (currentStep === 3) {
-                updatePreview();
-            }
-        }
-
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateSteps();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateSteps();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        });
-
-        // AI Description Generator
-        document.getElementById('generateDescBtn').addEventListener('click', async () => {
+        function generateDescription() {
             const keywords = document.getElementById('aiKeywords').value.trim();
             if (!keywords) {
                 alert('キーワードを入力してください');
                 return;
             }
 
-            const btn = document.getElementById('generateDescBtn');
-            btn.disabled = true;
-            document.getElementById('aiDescLoading').style.display = 'block';
-            document.getElementById('aiDescResult').style.display = 'none';
-
-            // Simulate AI processing
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            const randomDesc = sampleDescriptions[Math.floor(Math.random() * sampleDescriptions.length)];
-            document.getElementById('generatedDesc').textContent = randomDesc;
+            const loadingEl = document.getElementById('loadingDesc');
+            const resultEl = document.getElementById('aiDescResult');
             
-            document.getElementById('aiDescLoading').style.display = 'none';
-            document.getElementById('aiDescResult').style.display = 'block';
-            btn.disabled = false;
-        });
+            loadingEl.classList.add('show');
+            resultEl.classList.remove('show');
 
-        document.getElementById('applyDescBtn').addEventListener('click', () => {
+            setTimeout(() => {
+                const randomDesc = sampleDescriptions[Math.floor(Math.random() * sampleDescriptions.length)];
+                document.getElementById('generatedDesc').textContent = randomDesc;
+                
+                loadingEl.classList.remove('show');
+                resultEl.classList.add('show');
+            }, 2000);
+        }
+
+        function applyDescription() {
             const generatedText = document.getElementById('generatedDesc').textContent;
             document.getElementById('serviceDescription').value = generatedText;
             alert('✅ 紹介文を適用しました');
-        });
-
-        document.getElementById('regenerateDescBtn').addEventListener('click', () => {
-            document.getElementById('generateDescBtn').click();
-        });
-
-        // AI Price Suggestion
-        document.getElementById('suggestPriceBtn').addEventListener('click', async () => {
-            const btn = document.getElementById('suggestPriceBtn');
-            btn.disabled = true;
-            document.getElementById('aiPriceLoading').style.display = 'block';
-            document.getElementById('aiPriceResult').style.display = 'none';
-
-            // Simulate AI processing
-            await new Promise(resolve => setTimeout(resolve, 2500));
-
-            document.getElementById('aiPriceLoading').style.display = 'none';
-            document.getElementById('aiPriceResult').style.display = 'block';
-            btn.disabled = false;
-        });
-
-        // Price card selection
-        document.querySelectorAll('.price-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const price = card.getAttribute('data-price');
-                document.getElementById('servicePrice').value = price;
-                
-                document.querySelectorAll('.price-card').forEach(c => c.style.transform = '');
-                card.style.transform = 'scale(1.05)';
-                
-                setTimeout(() => {
-                    card.style.transform = '';
-                }, 300);
-            });
-        });
-
-        // Tags input
-        const tagInput = document.getElementById('tagInput');
-        const tagsContainer = document.getElementById('tagsContainer');
-
-        tagInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && tagInput.value.trim()) {
-                e.preventDefault();
-                const tagText = tagInput.value.trim();
-                if (!tags.includes(tagText)) {
-                    tags.push(tagText);
-                    addTag(tagText);
-                }
-                tagInput.value = '';
-            }
-        });
-
-        function addTag(text) {
-            const tag = document.createElement('div');
-            tag.className = 'tag';
-            tag.innerHTML = `
-                <span>${text}</span>
-                <span class="tag-remove">×</span>
-            `;
-            tag.querySelector('.tag-remove').addEventListener('click', () => {
-                const index = tags.indexOf(text);
-                if (index > -1) tags.splice(index, 1);
-                tag.remove();
-            });
-            tagsContainer.insertBefore(tag, tagInput);
         }
 
-        // Update preview
-        function updatePreview() {
-            const title = document.getElementById('serviceTitle').value || 'サービスタイトル';
-            const category = document.getElementById('serviceCategory').selectedOptions[0]?.text || '未選択';
-            const description = document.getElementById('serviceDescription').value || '説明がありません';
-            const price = document.getElementById('servicePrice').value || '0';
+        function suggestPrice() {
+            const loadingEl = document.getElementById('loadingPrice');
+            const resultEl = document.getElementById('aiPriceResult');
             
-            const format = document.querySelector('input[name="format"]:checked');
-            const type = document.querySelector('input[name="type"]:checked');
-            const formatText = format ? format.nextElementSibling.textContent.trim() : '未選択';
-            const typeText = type ? type.nextElementSibling.textContent.trim() : '未選択';
+            loadingEl.classList.add('show');
+            resultEl.classList.remove('show');
 
-            document.getElementById('previewTitle').textContent = title;
-            document.getElementById('previewCategory').textContent = category;
-            document.getElementById('previewDescription').textContent = description;
-            document.getElementById('previewPrice').textContent = parseInt(price).toLocaleString();
-            document.getElementById('previewFormat').textContent = `${formatText} / ${typeText}`;
+            setTimeout(() => {
+                loadingEl.classList.remove('show');
+                resultEl.classList.add('show');
+            }, 2500);
         }
 
-        // Submit
-        document.getElementById('submitBtn').addEventListener('click', () => {
+        function selectPrice(price) {
+            document.getElementById('servicePrice').value = price;
+            alert('価格を設定しました: ¥' + price);
+        }
+
+        function submitService() {
+            const title = document.getElementById('serviceTitle').value;
+            const category = document.getElementById('serviceCategory').value;
+            const description = document.getElementById('serviceDescription').value;
+            const price = document.getElementById('servicePrice').value;
+
+            if (!title || !category || !description || !price) {
+                alert('すべての必須項目を入力してください');
+                return;
+            }
+
             alert('🎉 出品が完了しました!\n\n審査後、サービスが公開されます。\nマイページで管理できます。');
             window.location.href = 'search.html';
-        });
-
-        // Initialize
-        updateSteps();
+        }
     </script>
 </body>
 </html>
