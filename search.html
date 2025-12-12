@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービスを探す - SkillLink</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF4757;
+            --primary-dark: #E63946;
+            --primary-light: #FF6B7A;
+            --secondary: #FF8A5B;
+            --accent: #FFA07A;
+            --bg-light: #FFF5F5;
+            --bg-white: #FFFFFF;
+            --text-dark: #2D3436;
+            --text-gray: #636E72;
+            --text-light: #B2BEC3;
+            --success: #00D2A5;
+            --shadow: rgba(255, 71, 87, 0.15);
+            --shadow-strong: rgba(255, 71, 87, 0.25);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+        
+        /* Header */
+        header {
+            background: var(--bg-white);
+            box-shadow: 0 2px 20px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Search Hero */
+        .search-hero {
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+            padding: 3rem 2rem;
+        }
+        
+        .search-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .search-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .search-header h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+        }
+        
+        /* AI Search Bar */
+        .ai-search-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .ai-badge-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-icon-large {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+        
+        .ai-badge-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .ai-search-input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .ai-search-input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid #E8E8E8;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .ai-search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--shadow);
+        }
+        
+        .ai-search-btn {
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+        
+        .ai-search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px var(--shadow-strong);
+        }
+        
+        .ai-suggestions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .ai-suggestion-chip {
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            border: 2px solid var(--primary-light);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .ai-suggestion-chip:hover {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* AI Results */
+        .ai-results-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--shadow);
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .ai-thinking {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #FFF5F5 0%, #FFE8E8 100%);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+        
+        .loading-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out;
+        }
+        
+        .loading-dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+        
+        .loading-dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+        
+        @keyframes bounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+        
+        .ai-response {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #FFF5F5 0%, white 100%);
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .ai-response h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ai-response p {
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+        
+        /* Filters Sidebar */
+        .filters-sidebar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filters-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .filter-group {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #E8E8E8;
+        }
+        
+        .filter-group:last-child {
+            border-bottom: none;
+        }
+        
+        .filter-group h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--text-dark);
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+        }
+        
+        .filter-option input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .filter-option label {
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        
+        .filter-count {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-left: auto;
+        }
+        
+        /* Services Grid */
+        .services-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 1.2rem 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .services-count {
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+        
+        .sort-select {
+            padding: 0.6rem 1rem;
+            border: 2px solid #E8E8E8;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Noto Sans JP', sans-serif;
+            cursor: pointer;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        /* Service Card */
+        .service-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+        }
+        
+        .service-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .service-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .service-info {
+            flex: 1;
+        }
+        
+        .service-provider {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .service-location {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        
+        .service-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+        
+        .service-description {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .service-meta {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #F0F0F0;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+        
+        .service-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .tag {
+            padding: 0.3rem 0.8rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .service-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.9rem;
+        }
+        
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+        }
+        
+        .price-unit {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-gray);
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: white;
+            border-radius: 20px;
+        }
+        
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .empty-state p {
+            color: var(--text-gray);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .filters-sidebar {
+                position: static;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .search-header h1 {
+                font-size: 2rem;
+            }
+            
+            .ai-search-input-container {
+                flex-direction: column;
+            }
+            
+            .ai-search-btn {
+                width: 100%;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">SkillLink</a>
+            <div class="nav-links">
+                <a href="search.html">サービスを探す</a>
+                <a href="create-listing.html">出品する</a>
+                <a href="index.html">ホーム</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="search-hero">
+        <div class="search-container">
+            <div class="search-header">
+                <h1>サービスを探す</h1>
+                <p>AIが最適なサービスを見つけます</p>
+            </div>
+
+            <!-- AI Search Section -->
+            <div class="ai-search-section">
+                <div class="ai-badge-header">
+                    <div class="ai-icon-large">🤖</div>
+                    <div>
+                        <h2>AI会話型検索</h2>
+                        <p style="color: var(--text-gray); margin: 0; font-size: 0.95rem;">
+                            欲しいサービスを自然な言葉で伝えてください
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="ai-search-input-container">
+                    <input 
+                        type="text" 
+                        class="ai-search-input" 
+                        id="aiSearchInput"
+                        placeholder="例: ベルリンで子供の学校送迎を手伝ってくれる人を探しています"
+                    >
+                    <button class="ai-search-btn" id="aiSearchBtn">🔍 AI検索</button>
+                </div>
+                
+                <div class="ai-suggestions">
+                    <div class="ai-suggestion-chip" data-query="ベルリンで買い物の同行サポートをしてほしい">🛒 買い物同行</div>
+                    <div class="ai-suggestion-chip" data-query="パリで観光ガイドをお願いしたい">✈️ 観光ガイド</div>
+                    <div class="ai-suggestion-chip" data-query="ドイツ語の会話レッスンを受けたい">💬 語学レッスン</div>
+                    <div class="ai-suggestion-chip" data-query="ロンドンで子供の送迎サポートが必要">👶 子供送迎</div>
+                    <div class="ai-suggestion-chip" data-query="翻訳の仕事を依頼したい">📄 翻訳</div>
+                </div>
+            </div>
+
+            <!-- AI Results Section -->
+            <div class="ai-results-section" id="aiResultsSection">
+                <div class="ai-thinking" id="aiThinking">
+                    <div class="ai-icon-large">🤔</div>
+                    <div style="flex: 1;">
+                        <strong>AIが分析中...</strong>
+                        <div class="loading-dots" style="margin-top: 0.5rem;">
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="ai-response" id="aiResponse" style="display: none;">
+                    <h3>💡 AIの回答</h3>
+                    <p id="aiResponseText"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="main-content">
+        <!-- Filters Sidebar -->
+        <aside class="filters-sidebar">
+            <div class="filters-header">🔧 絞り込み</div>
+            
+            <div class="filter-group">
+                <h3>カテゴリー</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-support" value="support">
+                    <label for="cat-support">同行サポート</label>
+                    <span class="filter-count">(5)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-life" value="life">
+                    <label for="cat-life">現地生活</label>
+                    <span class="filter-count">(1)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-travel" value="travel">
+                    <label for="cat-travel">旅行サポート</label>
+                    <span class="filter-count">(1)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-language" value="language">
+                    <label for="cat-language">語学レッスン</label>
+                    <span class="filter-count">(1)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-hobby" value="hobby">
+                    <label for="cat-hobby">趣味・文化</label>
+                    <span class="filter-count">(1)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="cat-business" value="business">
+                    <label for="cat-business">ビジネス支援</label>
+                    <span class="filter-count">(1)</span>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>提供形態</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="format-online" value="online">
+                    <label for="format-online">オンライン</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="format-inperson" value="in-person">
+                    <label for="format-inperson">対面</label>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>価格帯</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="price-1" value="0-3000">
+                    <label for="price-1">〜¥3,000</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="price-2" value="3000-5000">
+                    <label for="price-2">¥3,000 - ¥5,000</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="price-3" value="5000-10000">
+                    <label for="price-3">¥5,000 - ¥10,000</label>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="price-4" value="10000+">
+                    <label for="price-4">¥10,000〜</label>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <h3>都市</h3>
+                <div class="filter-option">
+                    <input type="checkbox" id="city-berlin" value="berlin">
+                    <label for="city-berlin">ベルリン</label>
+                    <span class="filter-count">(3)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="city-paris" value="paris">
+                    <label for="city-paris">パリ</label>
+                    <span class="filter-count">(2)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="city-london" value="london">
+                    <label for="city-london">ロンドン</label>
+                    <span class="filter-count">(2)</span>
+                </div>
+                <div class="filter-option">
+                    <input type="checkbox" id="city-other" value="other">
+                    <label for="city-other">その他</label>
+                    <span class="filter-count">(3)</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Services Section -->
+        <div class="services-section">
+            <div class="services-header">
+                <div class="services-count">
+                    <span id="servicesCount">10</span>件のサービス
+                </div>
+                <select class="sort-select" id="sortSelect">
+                    <option value="recommended">おすすめ順</option>
+                    <option value="price-low">価格が安い順</option>
+                    <option value="price-high">価格が高い順</option>
+                    <option value="rating">評価が高い順</option>
+                    <option value="new">新着順</option>
+                </select>
+            </div>
+
+            <div class="services-grid" id="servicesGrid">
+                <!-- Service cards will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample service data
+        const services = [
+            {
+                id: 1,
+                category: 'support',
+                title: 'ベルリン市内の買い物・移動同行サポート',
+                provider: '田中 美咲',
+                location: 'ベルリン',
+                city: 'berlin',
+                description: 'ドイツ語での交渉が必要な買い物や、公共交通機関の利用をサポートします。10年の現地経験でスムーズな案内が可能です。',
+                price: 4500,
+                priceUnit: '/ 時間',
+                rating: 4.9,
+                reviews: 127,
+                format: 'in-person',
+                emoji: '🛒',
+                tags: ['買い物', 'ドイツ語通訳', '送迎'],
+                badge: 'AI推奨'
+            },
+            {
+                id: 2,
+                category: 'support',
+                title: '子供の学校送迎・習い事同行サポート',
+                provider: '佐藤 健太',
+                location: 'ベルリン',
+                city: 'berlin',
+                description: '現地の学校システムに精通。お子様の安全な送迎と、学校との連絡も日本語でサポートします。',
+                price: 3800,
+                priceUnit: '/ 回',
+                rating: 5.0,
+                reviews: 89,
+                format: 'in-person',
+                emoji: '🚸',
+                tags: ['子供送迎', '学校サポート'],
+                badge: '人気'
+            },
+            {
+                id: 3,
+                category: 'support',
+                title: 'パリ市内アテンド・通訳同行サービス',
+                provider: '鈴木 あゆみ',
+                location: 'パリ',
+                city: 'paris',
+                description: 'フランス語・日本語・英語のトリリンガル。病院、役所、不動産など重要な場面での通訳をお手伝いします。',
+                price: 6000,
+                priceUnit: '/ 時間',
+                rating: 4.8,
+                reviews: 156,
+                format: 'in-person',
+                emoji: '🗼',
+                tags: ['通訳', '公的手続き'],
+                badge: 'プロ認定'
+            },
+            {
+                id: 4,
+                category: 'support',
+                title: 'ロンドン空港送迎・引越しサポート',
+                provider: '山田 直人',
+                location: 'ロンドン',
+                city: 'london',
+                description: '空港からの送迎や、引越しの際の荷物運搬をサポート。車両保有で大きな荷物も安心です。',
+                price: 8000,
+                priceUnit: '/ 回',
+                rating: 4.7,
+                reviews: 92,
+                format: 'in-person',
+                emoji: '🚗',
+                tags: ['空港送迎', '引越し'],
+                badge: null
+            },
+            {
+                id: 5,
+                category: 'support',
+                title: 'ミュンヘン病院・薬局同行サポート',
+                provider: '高橋 麻里',
+                location: 'ミュンヘン',
+                city: 'other',
+                description: '医療通訳の資格保持。病院での診察や、薬局での薬の購入を日本語でサポートします。',
+                price: 5500,
+                priceUnit: '/ 時間',
+                rating: 4.9,
+                reviews: 73,
+                format: 'in-person',
+                emoji: '🏥',
+                tags: ['医療通訳', '薬局'],
+                badge: '資格保有'
+            },
+            {
+                id: 6,
+                category: 'life',
+                title: 'ドイツ移住・生活立ち上げ相談',
+                provider: '伊藤 誠',
+                location: 'ベルリン',
+                city: 'berlin',
+                description: 'ビザ取得から住居探し、銀行口座開設まで、移住初期の全プロセスをオンラインでサポートします。',
+                price: 8000,
+                priceUnit: '/ セッション',
+                rating: 4.8,
+                reviews: 145,
+                format: 'online',
+                emoji: '🏠',
+                tags: ['移住相談', 'ビザ', '住居'],
+                badge: 'AI推奨'
+            },
+            {
+                id: 7,
+                category: 'travel',
+                title: 'パリ観光プラン作成（PDF納品）',
+                provider: '渡辺 さくら',
+                location: 'パリ',
+                city: 'paris',
+                description: 'あなたの希望に合わせた3日間の観光プランを作成。おすすめレストラン、交通手段、予算まで詳細に記載します。',
+                price: 3500,
+                priceUnit: '/ 固定',
+                rating: 4.9,
+                reviews: 234,
+                format: 'online',
+                emoji: '📋',
+                tags: ['観光プラン', 'PDF'],
+                badge: 'ベストセラー'
+            },
+            {
+                id: 8,
+                category: 'language',
+                title: 'ドイツ語会話レッスン（オンライン30分）',
+                provider: '中村 健',
+                location: 'フランクフルト',
+                city: 'other',
+                description: 'ネイティブレベルのドイツ語で日常会話を練習。発音矯正や、ビジネスドイツ語にも対応します。',
+                price: 2800,
+                priceUnit: '/ 30分',
+                rating: 5.0,
+                reviews: 189,
+                format: 'online',
+                emoji: '💬',
+                tags: ['ドイツ語', '会話レッスン'],
+                badge: '高評価'
+            },
+            {
+                id: 9,
+                category: 'hobby',
+                title: 'オンライン料理レッスン（ドイツ家庭料理）',
+                provider: '小林 恵子',
+                location: 'ハンブルク',
+                city: 'other',
+                description: 'シュニッツェル、ザワークラウトなど、本格的なドイツ家庭料理をオンラインで教えます。',
+                price: 4200,
+                priceUnit: '/ 60分',
+                rating: 4.7,
+                reviews: 67,
+                format: 'online',
+                emoji: '🍳',
+                tags: ['料理', 'ドイツ料理'],
+                badge: null
+            },
+            {
+                id: 10,
+                category: 'business',
+                title: '日独翻訳サービス（ビジネス文書）',
+                provider: '松本 拓也',
+                location: 'ロンドン',
+                city: 'london',
+                description: '契約書、プレゼン資料、メールなど、ビジネス文書の高品質翻訳。24時間以内納品。',
+                price: 12000,
+                priceUnit: '/ 1000文字',
+                rating: 4.9,
+                reviews: 312,
+                format: 'online',
+                emoji: '📄',
+                tags: ['翻訳', 'ビジネス'],
+                badge: 'プロ認定'
+            }
+        ];
+
+        // Render services
+        function renderServices(filteredServices = services) {
+            const grid = document.getElementById('servicesGrid');
+            const count = document.getElementById('servicesCount');
+            
+            count.textContent = filteredServices.length;
+            
+            if (filteredServices.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🔍</div>
+                        <h3>該当するサービスが見つかりませんでした</h3>
+                        <p>検索条件を変更してお試しください</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            grid.innerHTML = filteredServices.map(service => `
+                <a href="service-detail.html?id=${service.id}" class="service-card">
+                    <div class="service-image">
+                        ${service.emoji}
+                        ${service.badge ? `<div class="service-badge">${service.badge}</div>` : ''}
+                    </div>
+                    <div class="service-content">
+                        <div class="service-header">
+                            <div class="service-avatar">${service.provider.charAt(0)}</div>
+                            <div class="service-info">
+                                <div class="service-provider">${service.provider}</div>
+                                <div class="service-location">📍 ${service.location}</div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">${service.title}</h3>
+                        <p class="service-description">${service.description}</p>
+                        <div class="service-tags">
+                            ${service.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="service-meta">
+                            <span class="meta-item">${service.format === 'online' ? '💻 オンライン' : '🤝 対面'}</span>
+                        </div>
+                        <div class="service-footer">
+                            <div class="service-rating">
+                                ⭐ ${service.rating} <span style="color: var(--text-light);">(${service.reviews})</span>
+                            </div>
+                            <div>
+                                <span class="service-price">¥${service.price.toLocaleString()}</span>
+                                <span class="price-unit">${service.priceUnit}</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        // AI Search functionality
+        const aiResponses = {
+            '買い物': 'ベルリンやパリで買い物同行サポートを提供しているサービスが見つかりました。特に田中さんのサービスは10年の現地経験があり、ドイツ語での交渉もサポートしてくれます。',
+            '観光': 'パリの観光プランを作成してくれる渡辺さんのサービスがおすすめです。PDF形式で詳細なプランが納品されます。234件の高評価レビューがあります。',
+            '語学': 'ドイツ語のオンライン会話レッスンが30分2,800円から受けられます。中村さんはネイティブレベルで、発音矯正にも対応しています。',
+            '送迎': '子供の学校送迎なら佐藤さん、空港送迎なら山田さんのサービスがおすすめです。どちらも現地の事情に精通したプロバイダーです。',
+            '翻訳': 'ビジネス文書の翻訳なら松本さんのサービスがおすすめです。24時間以内納品で、312件の高評価を獲得しています。'
+        };
+
+        document.getElementById('aiSearchBtn').addEventListener('click', async () => {
+            const query = document.getElementById('aiSearchInput').value.trim();
+            if (!query) {
+                alert('検索キーワードを入力してください');
+                return;
+            }
+            
+            performAISearch(query);
+        });
+
+        // Suggestion chips
+        document.querySelectorAll('.ai-suggestion-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const query = chip.getAttribute('data-query');
+                document.getElementById('aiSearchInput').value = query;
+                performAISearch(query);
+            });
+        });
+
+        async function performAISearch(query) {
+            const resultsSection = document.getElementById('aiResultsSection');
+            const thinking = document.getElementById('aiThinking');
+            const response = document.getElementById('aiResponse');
+            const responseText = document.getElementById('aiResponseText');
+            
+            resultsSection.style.display = 'block';
+            thinking.style.display = 'flex';
+            response.style.display = 'none';
+            
+            // Simulate AI processing
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            
+            // Generate response based on keywords
+            let aiResponse = 'あなたの検索に最適なサービスを見つけました。以下のサービスをご確認ください。';
+            
+            for (const [keyword, text] of Object.entries(aiResponses)) {
+                if (query.includes(keyword)) {
+                    aiResponse = text;
+                    break;
+                }
+            }
+            
+            responseText.textContent = aiResponse;
+            thinking.style.display = 'none';
+            response.style.display = 'block';
+            
+            // Filter services based on query
+            filterServicesByQuery(query);
+            
+            // Scroll to results
+            setTimeout(() => {
+                document.querySelector('.main-content').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+
+        function filterServicesByQuery(query) {
+            const lowerQuery = query.toLowerCase();
+            let filtered = services;
+            
+            if (lowerQuery.includes('買い物') || lowerQuery.includes('ショッピング')) {
+                filtered = services.filter(s => s.tags.some(tag => tag.includes('買い物')));
+            } else if (lowerQuery.includes('観光') || lowerQuery.includes('ガイド')) {
+                filtered = services.filter(s => s.category === 'travel');
+            } else if (lowerQuery.includes('語学') || lowerQuery.includes('レッスン') || lowerQuery.includes('ドイツ語')) {
+                filtered = services.filter(s => s.category === 'language');
+            } else if (lowerQuery.includes('送迎') || lowerQuery.includes('子供')) {
+                filtered = services.filter(s => s.tags.some(tag => tag.includes('送迎') || tag.includes('子供')));
+            } else if (lowerQuery.includes('翻訳')) {
+                filtered = services.filter(s => s.tags.some(tag => tag.includes('翻訳')));
+            }
+            
+            renderServices(filtered);
+        }
+
+        // Filter functionality
+        const filterCheckboxes = document.querySelectorAll('.filter-option input[type="checkbox"]');
+        filterCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', applyFilters);
+        });
+
+        function applyFilters() {
+            const selectedCategories = Array.from(document.querySelectorAll('[id^="cat-"]:checked')).map(cb => cb.value);
+            const selectedFormats = Array.from(document.querySelectorAll('[id^="format-"]:checked')).map(cb => cb.value);
+            const selectedCities = Array.from(document.querySelectorAll('[id^="city-"]:checked')).map(cb => cb.value);
+            
+            let filtered = services;
+            
+            if (selectedCategories.length > 0) {
+                filtered = filtered.filter(s => selectedCategories.includes(s.category));
+            }
+            
+            if (selectedFormats.length > 0) {
+                filtered = filtered.filter(s => selectedFormats.includes(s.format));
+            }
+            
+            if (selectedCities.length > 0) {
+                filtered = filtered.filter(s => selectedCities.includes(s.city));
+            }
+            
+            renderServices(filtered);
+        }
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', (e) => {
+            const sortBy = e.target.value;
+            let sorted = [...services];
+            
+            switch(sortBy) {
+                case 'price-low':
+                    sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'rating':
+                    sorted.sort((a, b) => b.rating - a.rating);
+                    break;
+            }
+            
+            renderServices(sorted);
+        });
+
+        // Initialize
+        renderServices();
+    </script>
+</body>
+</html>
